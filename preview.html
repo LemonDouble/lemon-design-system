@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lemon Design System — Preview</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css">
+<style>
+  :root {
+    --primary: #F0B90B;
+    --primary-hover: #D4A30A;
+    --primary-dim: rgba(240, 185, 11, 0.12);
+    --primary-dim-border: rgba(240, 185, 11, 0.25);
+    --secondary: #CD6B5E;
+    --secondary-hover: #B85D51;
+    --secondary-dim: rgba(205, 107, 94, 0.12);
+    --secondary-dim-border: rgba(205, 107, 94, 0.25);
+    --bg: #12100E;
+    --surface: #1C1816;
+    --surface-hover: #231E1B;
+    --border: #2E2723;
+    --border-hover: #3D3530;
+    --text-primary: #F5F0EB;
+    --text-secondary: #A89E95;
+    --text-muted: #5C524A;
+    --success: #4ADE80;
+    --warning: #FACC15;
+    --error: #EF4444;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Galmuri: 제목/탭 전용, 항상 Bold(700) ===== */
+  .galmuri {
+    font-family: 'Galmuri11', monospace;
+    font-weight: 700;
+  }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(18, 16, 14, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .nav-title {
+    font-family: 'Galmuri11', monospace;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--primary);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: all 0.15s;
+  }
+  .nav-link:hover { color: var(--text-primary); background: var(--surface); }
+  .nav-link.active { color: var(--primary); background: var(--primary-dim); }
+
+  .nav-right { display: flex; gap: 12px; align-items: center; }
+
+  /* ===== BUTTONS ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: var(--bg);
+  }
+  .btn-primary:hover { background: var(--primary-hover); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--secondary);
+    border: 1px solid var(--secondary-dim-border);
+  }
+  .btn-secondary:hover { background: var(--secondary-dim); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--border-hover); color: var(--text-primary); }
+
+  .btn-sm {
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 6px;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 96px 32px 80px;
+    text-align: center;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-dim);
+    border: 1px solid var(--primary-dim-border);
+    padding: 6px 16px;
+    border-radius: 9999px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Galmuri11', monospace;
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 .highlight { color: var(--primary); }
+
+  .hero p {
+    font-size: 18px;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .hero-buttons { display: flex; gap: 12px; justify-content: center; }
+
+  /* ===== SECTION ===== */
+  .section {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 64px 32px;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
+  .section-label {
+    font-family: 'Galmuri11', monospace;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Galmuri11', monospace;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--text-primary);
+  }
+
+  .section-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    max-width: 600px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 32px;
+    max-width: 1016px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ===== CARDS ===== */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--primary-dim-border); }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .card-tag {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 9999px;
+  }
+
+  .card-tag--primary {
+    color: var(--primary);
+    background: var(--primary-dim);
+  }
+
+  .card-tag--secondary {
+    color: var(--secondary);
+    background: var(--secondary-dim);
+  }
+
+  .card-tag--success {
+    color: var(--success);
+    background: rgba(74, 222, 128, 0.1);
+  }
+
+  .card-status {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 6px;
+  }
+
+  .card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .card p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .card-footer {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .card-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* ===== TABLE ===== */
+  .table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  thead {
+    background: var(--surface);
+  }
+
+  th {
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-primary);
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--surface); }
+
+  .table-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* ===== CODE BLOCK ===== */
+  .code-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(0,0,0,0.15);
+  }
+
+  .code-filename {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .code-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .code-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .code-body {
+    padding: 20px 24px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    overflow-x: auto;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .code-line-num {
+    color: var(--text-muted);
+    user-select: none;
+    display: inline-block;
+    width: 28px;
+    text-align: right;
+    margin-right: 20px;
+  }
+
+  .c-comment { color: var(--text-muted); }
+  .c-keyword { color: var(--primary); }
+  .c-string { color: var(--secondary); }
+  .c-type { color: #4ADE80; }
+  .c-default { color: var(--text-primary); }
+
+  /* ===== INLINE ===== */
+  a { color: var(--primary); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  code {
+    font-family: 'Pretendard', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--surface);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--secondary);
+    border: 1px solid var(--border);
+  }
+
+  /* ===== ALERT / CALLOUT ===== */
+  .callout {
+    display: flex;
+    gap: 12px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 24px;
+  }
+
+  .callout-primary {
+    background: var(--primary-dim);
+    border: 1px solid var(--primary-dim-border);
+    color: var(--text-primary);
+  }
+
+  .callout-secondary {
+    background: var(--secondary-dim);
+    border: 1px solid var(--secondary-dim-border);
+    color: var(--text-primary);
+  }
+
+  .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ===== INPUT ===== */
+  .input-group {
+    display: flex;
+    gap: 8px;
+    margin-top: 24px;
+    max-width: 480px;
+  }
+
+  .input {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .input::placeholder { color: var(--text-muted); }
+  .input:focus { border-color: var(--primary-dim-border); }
+
+  /* ===== STATS ===== */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: 'Galmuri11', monospace;
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-text {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .footer-links { display: flex; gap: 20px; }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .footer-links a:hover { color: var(--primary); }
+
+  /* ===== TOGGLE ===== */
+  .toggle-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-top: 24px;
+  }
+
+  .toggle {
+    width: 44px;
+    height: 24px;
+    background: var(--border);
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .toggle.on { background: var(--primary); }
+
+  .toggle::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    background: var(--text-primary);
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+
+  .toggle.on::after { transform: translateX(20px); }
+
+  .toggle-label {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  /* ===== AVATAR ===== */
+  .avatar-stack {
+    display: flex;
+    margin-top: 24px;
+  }
+
+  .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--bg);
+    margin-left: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .avatar:first-child { margin-left: 0; }
+
+  /* ===== PROGRESS ===== */
+  .progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 16px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* ===== TABS ===== */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    gap: 0;
+  }
+
+  .tab-item {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-family: 'Pretendard', sans-serif;
+  }
+  .tab-item:hover { color: var(--text-secondary); }
+  .tab-item.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+  .tab-content { display: none; padding: 24px 0; }
+  .tab-content.active { display: block; }
+
+  /* ===== MODAL ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 480px;
+    margin: 16px;
+    overflow: hidden;
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .modal-header h3 {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .modal-close {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.15s;
+  }
+  .modal-close:hover { border-color: var(--border-hover); color: var(--text-primary); }
+
+  .modal-body {
+    padding: 24px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ===== DROPDOWN / SELECT ===== */
+  .select-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .select {
+    appearance: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 40px 10px 16px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    cursor: pointer;
+    outline: none;
+    min-width: 200px;
+    transition: border-color 0.15s;
+  }
+  .select:focus { border-color: var(--primary-dim-border); }
+
+  .select-arrow {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+    font-size: 12px;
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px;
+    min-width: 200px;
+    z-index: 50;
+    display: none;
+  }
+  .dropdown-menu.open { display: block; }
+
+  .dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    background: none;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Pretendard', sans-serif;
+    transition: all 0.1s;
+  }
+  .dropdown-item:hover { background: var(--surface-hover); color: var(--text-primary); }
+  .dropdown-item.active { color: var(--primary); }
+
+  /* ===== TOAST ===== */
+  .toast-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .toast {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .toast-icon {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .toast-message { flex: 1; color: var(--text-primary); }
+  .toast-dismiss {
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 16px;
+    background: none;
+    border: none;
+    padding: 0 4px;
+  }
+
+  .toast--success { border-color: rgba(74, 222, 128, 0.25); background: rgba(74, 222, 128, 0.06); }
+  .toast--success .toast-icon { background: rgba(74, 222, 128, 0.15); color: var(--success); }
+  .toast--warning { border-color: rgba(250, 204, 21, 0.25); background: rgba(250, 204, 21, 0.06); }
+  .toast--warning .toast-icon { background: rgba(250, 204, 21, 0.15); color: var(--warning); }
+  .toast--error { border-color: rgba(239, 68, 68, 0.25); background: rgba(239, 68, 68, 0.06); }
+  .toast--error .toast-icon { background: rgba(239, 68, 68, 0.15); color: var(--error); }
+
+  /* ===== CHECKBOX / RADIO ===== */
+  .form-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  .form-check + .form-check { margin-top: 12px; }
+
+  .checkbox, .radio {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s;
+  }
+
+  .checkbox { border-radius: 4px; }
+  .radio { border-radius: 50%; }
+
+  .checkbox:checked {
+    background: var(--primary);
+    border-color: var(--primary);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='%2312100E' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3E%3C/svg%3E");
+    background-size: 14px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .radio:checked {
+    border-color: var(--primary);
+    background: var(--surface);
+    box-shadow: inset 0 0 0 4px var(--primary);
+  }
+
+  .checkbox:focus, .radio:focus {
+    outline: 2px solid var(--primary-dim-border);
+    outline-offset: 1px;
+  }
+
+  /* ===== TEXTAREA ===== */
+  .textarea {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    outline: none;
+    resize: vertical;
+    min-height: 100px;
+    line-height: 1.6;
+    transition: border-color 0.15s;
+  }
+  .textarea::placeholder { color: var(--text-muted); }
+  .textarea:focus { border-color: var(--primary-dim-border); }
+
+  /* ===== BREADCRUMB ===== */
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    flex-wrap: wrap;
+  }
+
+  .breadcrumb a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .breadcrumb a:hover { color: var(--primary); text-decoration: none; }
+
+  .breadcrumb-sep { color: var(--text-muted); font-size: 12px; }
+  .breadcrumb-current { color: var(--text-primary); font-weight: 500; }
+
+  /* ===== TOOLTIP ===== */
+  .tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip-trigger {
+    border-bottom: 1px dashed var(--text-muted);
+    cursor: help;
+    color: var(--text-primary);
+  }
+
+  .tooltip-box {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-primary);
+    color: var(--bg);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s;
+  }
+
+  .tooltip-box::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--text-primary);
+  }
+
+  .tooltip-wrapper:hover .tooltip-box { opacity: 1; }
+
+  /* ===== SKELETON ===== */
+  @keyframes skeleton-pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  .skeleton {
+    background: var(--border);
+    border-radius: 6px;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+  }
+
+  .skeleton-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  /* ===== EMPTY STATE ===== */
+  .empty-state {
+    text-align: center;
+    padding: 64px 32px;
+    border: 1px dashed var(--border);
+    border-radius: 12px;
+  }
+
+  .empty-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+    opacity: 0.3;
+  }
+
+  .empty-state h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .empty-state p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+
+  /* ===== BLOCKQUOTE & LIST ===== */
+  .content-block blockquote {
+    border-left: 3px solid var(--primary);
+    padding: 12px 20px;
+    margin: 16px 0;
+    background: var(--primary-dim);
+    border-radius: 0 8px 8px 0;
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .content-block ul, .content-block ol {
+    padding-left: 24px;
+    margin: 12px 0;
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .content-block li + li { margin-top: 4px; }
+
+  .content-block ul li::marker { color: var(--primary); }
+  .content-block ol li::marker { color: var(--primary); font-weight: 600; }
+
+  .content-block hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 24px 0;
+  }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar-demo {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    height: 360px;
+  }
+
+  .sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-header {
+    padding: 0 16px 16px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 8px;
+  }
+
+  .sidebar-logo {
+    font-family: 'Galmuri11', monospace;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--primary);
+  }
+
+  .sidebar-nav { flex: 1; padding: 0 8px; }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.1s;
+  }
+  .sidebar-link:hover { background: var(--surface-hover); color: var(--text-primary); text-decoration: none; }
+  .sidebar-link.active { background: var(--primary-dim); color: var(--primary); }
+  .sidebar-link + .sidebar-link { margin-top: 2px; }
+
+  .sidebar-section {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 16px 12px 6px;
+  }
+
+  .sidebar-content {
+    padding: 24px;
+    overflow-y: auto;
+  }
+
+  .sidebar-content h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .sidebar-content p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ===== ACCORDION ===== */
+  .accordion {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .accordion-item { border-bottom: 1px solid var(--border); }
+  .accordion-item:last-child { border-bottom: none; }
+
+  .accordion-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: none;
+    border: none;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .accordion-trigger:hover { background: var(--surface); }
+
+  .accordion-icon {
+    color: var(--text-muted);
+    font-size: 14px;
+    transition: transform 0.2s;
+  }
+
+  .accordion-item.open .accordion-icon { transform: rotate(180deg); }
+
+  .accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+  }
+
+  .accordion-item.open .accordion-body { max-height: 200px; }
+
+  .accordion-content {
+    padding: 4px 20px 16px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ===== UTILITY ===== */
+  .demo-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .demo-col {
+    flex: 1;
+    min-width: 240px;
+  }
+
+  .demo-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  /* ===== ICONS ===== */
+  .icon-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: 80px;
+    padding: 16px 8px;
+    border-radius: 8px;
+    transition: background 0.1s;
+  }
+  .icon-item:hover { background: var(--surface); }
+
+  .icon-item i { color: var(--text-secondary); }
+  .icon-item:hover i { color: var(--text-primary); }
+
+  .icon-item span {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-align: center;
+    word-break: break-all;
+  }
+
+  .icon-usage-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+  }
+  .icon-usage-row + .icon-usage-row { border-top: 1px solid var(--border); }
+
+  .brand-icon {
+    width: 20px;
+    height: 20px;
+    fill: var(--text-muted);
+    transition: fill 0.15s;
+  }
+  .brand-icon:hover { fill: var(--text-primary); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <img src="images/lemon-logo.webp" alt="Lemon" class="nav-logo">
+    <span class="nav-title">LemonDouble</span>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="nav-link active">Dashboard</a>
+    <a href="#" class="nav-link">Projects</a>
+    <a href="#" class="nav-link">Blog</a>
+    <a href="#" class="nav-link">About</a>
+  </div>
+  <div class="nav-right">
+    <a href="#" class="btn btn-sm btn-ghost">GitHub</a>
+    <a href="#" class="btn btn-sm btn-primary">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">v1.0 Released</div>
+  <h1>Build with <span class="highlight">LemonDouble</span><br>Design System.</h1>
+  <p>하나의 디자인 시스템으로 모든 개인 프로젝트에 일관된 브랜드 아이덴티티를 부여합니다.</p>
+  <div class="hero-buttons">
+    <a href="#" class="btn btn-primary">Get Started</a>
+    <a href="#" class="btn btn-ghost">Documentation</a>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- STATS -->
+<section class="section">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value">12</div>
+      <div class="stat-label">Projects</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">47</div>
+      <div class="stat-label">Components</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">3</div>
+      <div class="stat-label">Fonts</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">99%</div>
+      <div class="stat-label">Consistency</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CARDS -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Projects</div>
+    <div class="section-title galmuri">Recent Work</div>
+    <p class="section-desc">최근 작업한 프로젝트들입니다.</p>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-tag card-tag--primary">TypeScript</div>
+        <div class="card-status" style="background: var(--success);"></div>
+      </div>
+      <h3>금요미식회 설문 툴</h3>
+      <p>팀 내 식당 투표를 위한 실시간 설문 시스템. Geist 폰트와 zinc 다크 테마 기반.</p>
+      <div class="card-footer">
+        <span class="card-meta">Next.js</span>
+        <span class="card-meta">Supabase</span>
+        <span class="card-meta">Vercel</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-tag card-tag--secondary">Infrastructure</div>
+        <div class="card-status" style="background: var(--success);"></div>
+      </div>
+      <h3>홈서버 쿠버네티스</h3>
+      <p>라즈베리파이 클러스터 위에 구축한 개인 k8s 인프라. GitOps로 관리.</p>
+      <div class="card-footer">
+        <span class="card-meta">K8s</span>
+        <span class="card-meta">ArgoCD</span>
+        <span class="card-meta">Terraform</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-tag card-tag--success">IoT</div>
+        <div class="card-status" style="background: var(--warning);"></div>
+      </div>
+      <h3>Home Assistant 자동화</h3>
+      <p>집 안 모든 IoT 장치를 연결하는 스마트홈 자동화 파이프라인.</p>
+      <div class="card-footer">
+        <span class="card-meta">MQTT</span>
+        <span class="card-meta">Zigbee</span>
+        <span class="card-meta">ESPHome</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TABLE -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Overview</div>
+    <div class="section-title galmuri">Design Tokens</div>
+    <p class="section-desc">시스템을 구성하는 핵심 디자인 토큰들.</p>
+  </div>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Value</th>
+          <th>Role</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Primary</td>
+          <td><code>#F0B90B</code></td>
+          <td>CTA, 강조, 링크</td>
+          <td><span class="table-tag" style="background:var(--primary-dim);color:var(--primary);">Color</span></td>
+        </tr>
+        <tr>
+          <td>Secondary</td>
+          <td><code>#CD6B5E</code></td>
+          <td>보조 강조, 태그, 코드</td>
+          <td><span class="table-tag" style="background:var(--secondary-dim);color:var(--secondary);">Color</span></td>
+        </tr>
+        <tr>
+          <td>Background</td>
+          <td><code>#12100E</code></td>
+          <td>페이지 배경</td>
+          <td><span class="table-tag" style="background:var(--primary-dim);color:var(--primary);">Color</span></td>
+        </tr>
+        <tr>
+          <td>Heading Font</td>
+          <td>Galmuri11 Bold</td>
+          <td>제목, 탭, 섹션 레이블</td>
+          <td><span class="table-tag" style="background:var(--secondary-dim);color:var(--secondary);">Font</span></td>
+        </tr>
+        <tr>
+          <td>Body Font</td>
+          <td>Pretendard</td>
+          <td>본문, 버튼, 입력, 코드, 전부</td>
+          <td><span class="table-tag" style="background:var(--secondary-dim);color:var(--secondary);">Font</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CODE -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Code</div>
+    <div class="section-title galmuri">Quick Start</div>
+  </div>
+  <div class="code-block">
+    <div class="code-header">
+      <div class="code-dots">
+        <div class="code-dot" style="background:#EF4444;"></div>
+        <div class="code-dot" style="background:#FACC15;"></div>
+        <div class="code-dot" style="background:#4ADE80;"></div>
+      </div>
+      <div class="code-filename">theme.config.ts</div>
+    </div>
+    <div class="code-body">
+      <div><span class="code-line-num">1</span><span class="c-keyword">import</span> <span class="c-default">{ defineConfig }</span> <span class="c-keyword">from</span> <span class="c-string">"lemon-design"</span></div>
+      <div><span class="code-line-num">2</span></div>
+      <div><span class="code-line-num">3</span><span class="c-keyword">export default</span> <span class="c-default">defineConfig({</span></div>
+      <div><span class="code-line-num">4</span>&nbsp;&nbsp;<span class="c-default">colors:</span> <span class="c-default">{</span></div>
+      <div><span class="code-line-num">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-default">primary:</span> <span class="c-string">"#F0B90B"</span><span class="c-default">,</span> <span class="c-comment">// Logo Yellow</span></div>
+      <div><span class="code-line-num">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-default">secondary:</span> <span class="c-string">"#CD6B5E"</span><span class="c-default">,</span> <span class="c-comment">// Logo Coral</span></div>
+      <div><span class="code-line-num">7</span>&nbsp;&nbsp;<span class="c-default">},</span></div>
+      <div><span class="code-line-num">8</span>&nbsp;&nbsp;<span class="c-default">fonts:</span> <span class="c-default">{</span></div>
+      <div><span class="code-line-num">9</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-default">heading:</span> <span class="c-string">"Galmuri11"</span><span class="c-default">,</span> <span class="c-comment">// Bold(700) only</span></div>
+      <div><span class="code-line-num">10</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-default">body:</span> <span class="c-string">"Pretendard"</span><span class="c-default">,</span></div>
+      <div><span class="code-line-num">11</span>&nbsp;&nbsp;<span class="c-default">},</span></div>
+      <div><span class="code-line-num">12</span><span class="c-default">})</span></div>
+    </div>
+  </div>
+
+  <div class="callout callout-primary" style="margin-top:24px;">
+    <span class="callout-icon">*</span>
+    <span>Galmuri11은 항상 <strong>font-weight: 700 (Bold)</strong>로만 사용합니다. Regular(400) 사용은 금지.</span>
+  </div>
+
+  <div class="callout callout-secondary" style="margin-top:12px;">
+    <span class="callout-icon">!</span>
+    <span>코드 블록, 인라인 코드, Chip 등 가독성이 필요한 곳은 모두 Pretendard를 사용합니다.</span>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FORM ELEMENTS -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Form</div>
+    <div class="section-title galmuri">Interactive Elements</div>
+  </div>
+
+  <div class="input-group">
+    <input type="text" class="input" placeholder="이메일 주소를 입력하세요">
+    <button class="btn btn-primary">Subscribe</button>
+  </div>
+
+  <div class="toggle-row">
+    <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+    <span class="toggle-label">다크 모드 활성화</span>
+  </div>
+
+  <div class="toggle-row">
+    <div class="toggle" onclick="this.classList.toggle('on')"></div>
+    <span class="toggle-label">알림 수신</span>
+  </div>
+
+  <div style="margin-top:32px;">
+    <p style="font-size:14px;color:var(--text-secondary);margin-bottom:8px;">프로젝트 진행률</p>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:72%;background:linear-gradient(90deg, var(--primary), var(--secondary));"></div>
+    </div>
+    <div class="progress-label">
+      <span>Phase 3</span>
+      <span>72%</span>
+    </div>
+  </div>
+
+  <div style="margin-top:32px;">
+    <p style="font-size:14px;color:var(--text-secondary);margin-bottom:8px;">Contributors</p>
+    <div class="avatar-stack">
+      <div class="avatar" style="padding:0;overflow:hidden;"><img src="images/lemon-avatar.webp" alt="LemonDouble" style="width:100%;height:100%;object-fit:cover;"></div>
+      <div class="avatar" style="background:var(--secondary);color:var(--bg);">K</div>
+      <div class="avatar" style="background:var(--success);color:var(--bg);">J</div>
+      <div class="avatar" style="background:var(--text-muted);color:var(--bg);">+3</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TYPOGRAPHY -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Typography</div>
+    <div class="section-title galmuri">Type Scale</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:20px;">
+    <div>
+      <span style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px;">Galmuri11 Bold — 44px / Heading 1</span>
+      <span class="galmuri" style="font-size:44px;line-height:1.2;">레몬 디자인 시스템</span>
+    </div>
+    <div>
+      <span style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px;">Galmuri11 Bold — 28px / Heading 2</span>
+      <span class="galmuri" style="font-size:28px;line-height:1.3;">섹션 제목 스타일</span>
+    </div>
+    <div>
+      <span style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px;">Galmuri11 Bold — 20px / Heading 3</span>
+      <span class="galmuri" style="font-size:20px;line-height:1.4;">카드 및 소제목</span>
+    </div>
+    <hr style="border:none;border-top:1px dashed var(--border);">
+    <div>
+      <span style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px;">Pretendard 400 — 18px / Body Large</span>
+      <span style="font-size:18px;color:var(--text-secondary);line-height:1.7;">본문 텍스트는 Pretendard로 렌더링되어 최적의 가독성을 제공합니다. 긴 문단에서도 눈이 편안합니다.</span>
+    </div>
+    <div>
+      <span style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px;">Pretendard 400 — 14px / Body</span>
+      <span style="font-size:14px;color:var(--text-secondary);line-height:1.6;">카드 설명, 테이블 내용, 메타데이터 등에 사용되는 기본 본문 크기입니다.</span>
+    </div>
+    <div>
+      <span style="font-size:12px;color:var(--text-muted);display:block;margin-bottom:4px;">Pretendard 600 — 14px / Label</span>
+      <span style="font-size:14px;font-weight:600;color:var(--text-primary);">버튼, 태그, 강조 레이블에 사용합니다.</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TABS -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Navigation</div>
+    <div class="section-title galmuri">Tabs</div>
+  </div>
+  <div class="tabs" id="demoTabs">
+    <button class="tab-item active" data-tab="tab1">Overview</button>
+    <button class="tab-item" data-tab="tab2">Analytics</button>
+    <button class="tab-item" data-tab="tab3">Settings</button>
+    <button class="tab-item" data-tab="tab4">Logs</button>
+  </div>
+  <div class="tab-content active" id="tab1">
+    <p style="font-size:14px;color:var(--text-secondary);">프로젝트의 전체 현황을 확인할 수 있는 개요 탭입니다. 카드, 차트, 요약 정보 등이 표시됩니다.</p>
+  </div>
+  <div class="tab-content" id="tab2">
+    <p style="font-size:14px;color:var(--text-secondary);">방문자 수, 페이지뷰, 이벤트 등 분석 데이터가 표시됩니다.</p>
+  </div>
+  <div class="tab-content" id="tab3">
+    <p style="font-size:14px;color:var(--text-secondary);">프로젝트 설정, 환경 변수, 도메인 관리 등을 구성합니다.</p>
+  </div>
+  <div class="tab-content" id="tab4">
+    <p style="font-size:14px;color:var(--text-secondary);">빌드 로그, 런타임 로그, 에러 로그를 확인합니다.</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- BREADCRUMB -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Navigation</div>
+    <div class="section-title galmuri">Breadcrumb</div>
+  </div>
+  <div class="breadcrumb">
+    <a href="#">Home</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="#">Projects</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="#">금요미식회</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-current">Settings</span>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- DROPDOWN & SELECT -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Form</div>
+    <div class="section-title galmuri">Dropdown & Select</div>
+  </div>
+  <div class="demo-row">
+    <div class="demo-col">
+      <span class="demo-label">Native Select</span>
+      <div class="select-wrapper">
+        <select class="select">
+          <option>프레임워크 선택</option>
+          <option>Next.js</option>
+          <option>Nuxt</option>
+          <option>SvelteKit</option>
+          <option>Astro</option>
+        </select>
+        <span class="select-arrow">&#9662;</span>
+      </div>
+    </div>
+    <div class="demo-col">
+      <span class="demo-label">Dropdown Menu</span>
+      <div class="dropdown">
+        <button class="btn btn-ghost btn-sm" onclick="this.nextElementSibling.classList.toggle('open')">Actions &#9662;</button>
+        <div class="dropdown-menu">
+          <button class="dropdown-item active">Edit</button>
+          <button class="dropdown-item">Duplicate</button>
+          <button class="dropdown-item">Archive</button>
+          <button class="dropdown-item" style="color:var(--error);">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CHECKBOX & RADIO -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Form</div>
+    <div class="section-title galmuri">Checkbox & Radio</div>
+  </div>
+  <div class="demo-row">
+    <div class="demo-col">
+      <span class="demo-label">Checkbox</span>
+      <label class="form-check">
+        <input type="checkbox" class="checkbox" checked>
+        <span>이메일 알림 수신</span>
+      </label>
+      <label class="form-check">
+        <input type="checkbox" class="checkbox" checked>
+        <span>Slack 알림 수신</span>
+      </label>
+      <label class="form-check">
+        <input type="checkbox" class="checkbox">
+        <span>마케팅 메일 수신 (선택)</span>
+      </label>
+    </div>
+    <div class="demo-col">
+      <span class="demo-label">Radio</span>
+      <label class="form-check">
+        <input type="radio" name="plan" class="radio" checked>
+        <span>Free — 개인 프로젝트</span>
+      </label>
+      <label class="form-check">
+        <input type="radio" name="plan" class="radio">
+        <span>Pro — 팀 협업</span>
+      </label>
+      <label class="form-check">
+        <input type="radio" name="plan" class="radio">
+        <span>Enterprise — 조직 전체</span>
+      </label>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TEXTAREA -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Form</div>
+    <div class="section-title galmuri">Textarea</div>
+  </div>
+  <div style="max-width:560px;">
+    <label style="font-size:14px;font-weight:600;color:var(--text-primary);display:block;margin-bottom:8px;">피드백</label>
+    <textarea class="textarea" placeholder="의견이나 제안 사항을 자유롭게 작성해주세요..."></textarea>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- MODAL -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Overlay</div>
+    <div class="section-title galmuri">Modal / Dialog</div>
+  </div>
+  <button class="btn btn-primary" onclick="document.getElementById('demoModal').classList.add('open')">Open Modal</button>
+  <p style="font-size:13px;color:var(--text-muted);margin-top:8px;">버튼을 클릭하면 모달이 열립니다.</p>
+</section>
+
+<div class="modal-overlay" id="demoModal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>프로젝트 삭제</h3>
+      <button class="modal-close" onclick="document.getElementById('demoModal').classList.remove('open')">&#10005;</button>
+    </div>
+    <div class="modal-body">
+      <p>정말로 이 프로젝트를 삭제하시겠습니까? 이 작업은 되돌릴 수 없으며, 모든 데이터가 영구적으로 삭제됩니다.</p>
+      <div style="margin-top:16px;">
+        <span class="demo-label">확인을 위해 프로젝트 이름을 입력하세요</span>
+        <input type="text" class="input" placeholder="my-project" style="width:100%;margin-top:4px;">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('demoModal').classList.remove('open')">Cancel</button>
+      <button class="btn btn-sm" style="background:var(--error);color:var(--bg);">Delete</button>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- TOAST / NOTIFICATION -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Feedback</div>
+    <div class="section-title galmuri">Toast / Notification</div>
+  </div>
+  <div class="toast-container">
+    <div class="toast toast--success">
+      <div class="toast-icon">&#10003;</div>
+      <span class="toast-message">배포가 성공적으로 완료되었습니다.</span>
+      <button class="toast-dismiss">&#10005;</button>
+    </div>
+    <div class="toast toast--warning">
+      <div class="toast-icon">!</div>
+      <span class="toast-message">빌드 캐시가 만료되었습니다. 다음 배포 시 시간이 더 걸릴 수 있습니다.</span>
+      <button class="toast-dismiss">&#10005;</button>
+    </div>
+    <div class="toast toast--error">
+      <div class="toast-icon">&#10005;</div>
+      <span class="toast-message">환경 변수 설정 중 오류가 발생했습니다.</span>
+      <button class="toast-dismiss">&#10005;</button>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TOOLTIP -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Overlay</div>
+    <div class="section-title galmuri">Tooltip</div>
+  </div>
+  <p style="font-size:14px;color:var(--text-secondary);line-height:2;">
+    배포 상태는
+    <span class="tooltip-wrapper">
+      <span class="tooltip-trigger">SSR</span>
+      <span class="tooltip-box">Server-Side Rendering</span>
+    </span>
+    과
+    <span class="tooltip-wrapper">
+      <span class="tooltip-trigger">ISR</span>
+      <span class="tooltip-box">Incremental Static Regeneration</span>
+    </span>
+    에 따라 다르게 표시됩니다.
+    <span class="tooltip-wrapper">
+      <span class="tooltip-trigger">Edge Runtime</span>
+      <span class="tooltip-box">Vercel Edge Network에서 실행되는 서버리스 함수</span>
+    </span>
+    을 사용하면 응답 시간이 단축됩니다.
+  </p>
+</section>
+
+<hr class="divider">
+
+<!-- BLOCKQUOTE & LIST -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Content</div>
+    <div class="section-title galmuri">Blockquote & List</div>
+  </div>
+  <div class="content-block">
+    <blockquote>
+      좋은 디자인 시스템은 제약을 통해 자유를 만든다. 선택지가 줄어들면 일관성은 자연스럽게 따라온다.
+    </blockquote>
+
+    <p style="font-size:14px;color:var(--text-secondary);margin:16px 0 8px;font-weight:600;">Unordered List</p>
+    <ul>
+      <li>Galmuri11은 제목에만 사용한다</li>
+      <li>본문, 코드, 태그는 모두 Pretendard를 사용한다</li>
+      <li>순수 블랙(#000) 대신 따뜻한 다크(#12100E)를 사용한다</li>
+      <li>깊이는 shadow 대신 border로 표현한다</li>
+    </ul>
+
+    <p style="font-size:14px;color:var(--text-secondary);margin:16px 0 8px;font-weight:600;">Ordered List</p>
+    <ol>
+      <li>DESIGN.md를 프로젝트 루트에 복사한다</li>
+      <li>Galmuri11과 Pretendard CDN을 추가한다</li>
+      <li>CSS 변수를 설정한다</li>
+      <li>AI 에이전트에게 "이 디자인 시스템으로 만들어" 라고 말한다</li>
+    </ol>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SIDEBAR -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Layout</div>
+    <div class="section-title galmuri">Sidebar Navigation</div>
+  </div>
+  <div class="sidebar-demo">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="sidebar-logo">LemonDouble</span>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="sidebar-section">General</div>
+        <a href="#" class="sidebar-link active">Overview</a>
+        <a href="#" class="sidebar-link">Analytics</a>
+        <a href="#" class="sidebar-link">Deployments</a>
+        <div class="sidebar-section">Settings</div>
+        <a href="#" class="sidebar-link">General</a>
+        <a href="#" class="sidebar-link">Environment</a>
+        <a href="#" class="sidebar-link">Domains</a>
+        <a href="#" class="sidebar-link">Integrations</a>
+      </nav>
+    </aside>
+    <div class="sidebar-content">
+      <h3>Project Overview</h3>
+      <p>사이드바 네비게이션은 대시보드나 설정 페이지에서 사용합니다. 왼쪽에 고정된 네비게이션과 오른쪽 콘텐츠 영역으로 구성됩니다.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ACCORDION -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Interactive</div>
+    <div class="section-title galmuri">Accordion</div>
+  </div>
+  <div class="accordion">
+    <div class="accordion-item open">
+      <button class="accordion-trigger" onclick="this.parentElement.classList.toggle('open')">
+        <span>Galmuri11은 어디에 사용하나요?</span>
+        <span class="accordion-icon">&#9662;</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-content">제목(h1-h3), 탭 레이블, 섹션 레이블, Stat 숫자에만 사용합니다. 반드시 Bold(700) weight로만 사용하며, Regular(400)는 사용하지 않습니다.</div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="this.parentElement.classList.toggle('open')">
+        <span>코드 블록에는 어떤 폰트를 사용하나요?</span>
+        <span class="accordion-icon">&#9662;</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-content">코드 블록과 인라인 코드 모두 Pretendard를 사용합니다. 가독성이 최우선이기 때문에, 코드에서도 픽셀 폰트 대신 본문 폰트를 씁니다.</div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="this.parentElement.classList.toggle('open')">
+        <span>라이트 모드를 지원하나요?</span>
+        <span class="accordion-icon">&#9662;</span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-content">아니요. 이 디자인 시스템은 다크 모드 전용입니다. 로고의 따뜻한 브라운에서 파생된 다크 배경(#12100E)이 핵심 아이덴티티입니다.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKELETON LOADING -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">State</div>
+    <div class="section-title galmuri">Skeleton Loading</div>
+  </div>
+  <div class="card-grid">
+    <div class="skeleton-card">
+      <div class="skeleton" style="width:80px;height:22px;margin-bottom:16px;"></div>
+      <div class="skeleton" style="width:70%;height:18px;margin-bottom:10px;"></div>
+      <div class="skeleton" style="width:100%;height:14px;margin-bottom:6px;"></div>
+      <div class="skeleton" style="width:90%;height:14px;margin-bottom:20px;"></div>
+      <div style="border-top:1px solid var(--border);padding-top:16px;display:flex;gap:12px;">
+        <div class="skeleton" style="width:60px;height:14px;"></div>
+        <div class="skeleton" style="width:60px;height:14px;"></div>
+        <div class="skeleton" style="width:60px;height:14px;"></div>
+      </div>
+    </div>
+    <div class="skeleton-card">
+      <div class="skeleton" style="width:100px;height:22px;margin-bottom:16px;"></div>
+      <div class="skeleton" style="width:60%;height:18px;margin-bottom:10px;"></div>
+      <div class="skeleton" style="width:100%;height:14px;margin-bottom:6px;"></div>
+      <div class="skeleton" style="width:80%;height:14px;margin-bottom:20px;"></div>
+      <div style="border-top:1px solid var(--border);padding-top:16px;display:flex;gap:12px;">
+        <div class="skeleton" style="width:50px;height:14px;"></div>
+        <div class="skeleton" style="width:70px;height:14px;"></div>
+      </div>
+    </div>
+    <div class="skeleton-card">
+      <div class="skeleton" style="width:60px;height:22px;margin-bottom:16px;"></div>
+      <div class="skeleton" style="width:80%;height:18px;margin-bottom:10px;"></div>
+      <div class="skeleton" style="width:95%;height:14px;margin-bottom:6px;"></div>
+      <div class="skeleton" style="width:70%;height:14px;margin-bottom:20px;"></div>
+      <div style="border-top:1px solid var(--border);padding-top:16px;display:flex;gap:12px;">
+        <div class="skeleton" style="width:55px;height:14px;"></div>
+        <div class="skeleton" style="width:55px;height:14px;"></div>
+        <div class="skeleton" style="width:55px;height:14px;"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EMPTY STATE -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">State</div>
+    <div class="section-title galmuri">Empty State</div>
+  </div>
+  <div class="empty-state">
+    <img src="images/lemon-avatar.webp" alt="LemonDouble" style="width:80px;height:80px;object-fit:cover;border-radius:50%;margin-bottom:16px;">
+    <h3>프로젝트가 없습니다</h3>
+    <p>새 프로젝트를 만들어 시작하세요.</p>
+    <button class="btn btn-primary">Create Project</button>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-text">© 2026 LemonDouble. Built with LemonDouble Design System.</div>
+  <div class="footer-links">
+    <a href="#">Blog</a>
+    <a href="#">GitHub</a>
+    <a href="#">About</a>
+  </div>
+</footer>
+
+<script>
+  // Tabs
+  document.querySelectorAll('#demoTabs .tab-item').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('#demoTabs .tab-item').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Lucide icons
+  if (window.lucide) lucide.createIcons();
+
+  // Close dropdown on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.dropdown')) {
+      document.querySelectorAll('.dropdown-menu').forEach(m => m.classList.remove('open'));
+    }
+  });
+</script>
+
+</body>
+</html>
