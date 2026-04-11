@@ -2,12 +2,6 @@
 
 AI 에이전트가 읽을 수 있는 개인 디자인 시스템. 프로젝트에 `DESIGN.md`를 복사하고 "이 디자인 시스템으로 만들어"라고 하면 일관된 LemonDouble 스타일이 적용됩니다.
 
-## Usage
-
-```bash
-cp DESIGN.md /path/to/your-project/
-```
-
 ## Files
 
 | File | Description |
