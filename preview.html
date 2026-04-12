@@ -887,6 +887,48 @@
     font-size: 14px;
   }
 
+  /* ===== PAGE JUMP (editable current page) ===== */
+  .page-jump-wrap {
+    position: relative;
+    display: inline-flex;
+  }
+  .page-jump-input {
+    min-width: 36px;
+    width: 44px;
+    height: 36px;
+    background: var(--primary);
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    color: var(--bg);
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    text-align: center;
+    outline: none;
+    cursor: text;
+  }
+  .page-jump-input:focus {
+    background: var(--surface);
+    color: var(--primary);
+    border-color: var(--primary-dim-border);
+  }
+  .page-jump-icon {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 16px;
+    height: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--text-secondary);
+    pointer-events: none;
+  }
+
   /* ===== CHECKBOX / RADIO ===== */
   .form-check {
     display: flex;
@@ -1646,12 +1688,15 @@
     <div class="section-title galmuri">Pagination</div>
   </div>
   <div class="pagination">
-    <a class="pagination-item disabled">&larr;</a>
-    <a class="pagination-item active">1</a>
+    <a class="pagination-item">&larr;</a>
+    <a class="pagination-item">1</a>
     <a class="pagination-item">2</a>
-    <a class="pagination-item">3</a>
+    <div class="page-jump-wrap">
+      <input class="page-jump-input" type="text" value="3">
+      <span class="page-jump-icon">&#9998;</span>
+    </div>
     <span class="pagination-ellipsis">&hellip;</span>
-    <a class="pagination-item">12</a>
+    <a class="pagination-item">99</a>
     <a class="pagination-item">&rarr;</a>
   </div>
 </section>
