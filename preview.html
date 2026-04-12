@@ -142,6 +142,23 @@
     border-radius: 6px;
   }
 
+  .btn:disabled, .btn[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .input:disabled, .input[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background: var(--surface);
+    color: var(--text-muted);
+  }
+  .toggle.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
   /* ===== HERO ===== */
   .hero {
     max-width: 800px;
@@ -821,6 +838,55 @@
   .toast--info { border-color: rgba(96, 165, 250, 0.25); background: rgba(96, 165, 250, 0.06); }
   .toast--info .toast-icon { background: rgba(96, 165, 250, 0.15); color: var(--info); }
 
+  /* ===== PAGINATION ===== */
+  .pagination {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .pagination-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .pagination-item:hover {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text-primary);
+  }
+  .pagination-item.active {
+    background: var(--primary);
+    color: var(--bg);
+    font-weight: 600;
+    border-color: var(--primary);
+  }
+  .pagination-item.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .pagination-ellipsis {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
   /* ===== CHECKBOX / RADIO ===== */
   .form-check {
     display: flex;
@@ -1466,6 +1532,28 @@
 
 <hr class="divider">
 
+<!-- DISABLED STATES -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">State</div>
+    <div class="section-title galmuri">Disabled</div>
+  </div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+    <button class="btn btn-primary" disabled>Primary</button>
+    <button class="btn btn-secondary" disabled>Secondary</button>
+    <button class="btn btn-ghost" disabled>Ghost</button>
+  </div>
+  <div style="margin-top:20px;max-width:400px;">
+    <input type="text" class="input" value="비활성 입력 필드" disabled>
+  </div>
+  <div class="toggle-row" style="margin-top:20px;">
+    <div class="toggle on disabled"></div>
+    <span class="toggle-label" style="opacity:0.4;">비활성 토글</span>
+  </div>
+</section>
+
+<hr class="divider">
+
 <!-- TYPOGRAPHY -->
 <section class="section">
   <div class="section-header">
@@ -1546,6 +1634,25 @@
     <a href="#">금요미식회</a>
     <span class="breadcrumb-sep">/</span>
     <span class="breadcrumb-current">Settings</span>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PAGINATION -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Navigation</div>
+    <div class="section-title galmuri">Pagination</div>
+  </div>
+  <div class="pagination">
+    <a class="pagination-item disabled">&larr;</a>
+    <a class="pagination-item active">1</a>
+    <a class="pagination-item">2</a>
+    <a class="pagination-item">3</a>
+    <span class="pagination-ellipsis">&hellip;</span>
+    <a class="pagination-item">12</a>
+    <a class="pagination-item">&rarr;</a>
   </div>
 </section>
 
