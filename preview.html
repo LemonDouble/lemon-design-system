@@ -25,6 +25,7 @@
     --text-primary: #F5F0EB;
     --text-secondary: #A89E95;
     --text-muted: #5C524A;
+    --info: #60A5FA;
     --success: #4ADE80;
     --warning: #FACC15;
     --error: #EF4444;
@@ -816,6 +817,9 @@
   .toast--warning .toast-icon { background: rgba(250, 204, 21, 0.15); color: var(--warning); }
   .toast--error { border-color: rgba(239, 68, 68, 0.25); background: rgba(239, 68, 68, 0.06); }
   .toast--error .toast-icon { background: rgba(239, 68, 68, 0.15); color: var(--error); }
+
+  .toast--info { border-color: rgba(96, 165, 250, 0.25); background: rgba(96, 165, 250, 0.06); }
+  .toast--info .toast-icon { background: rgba(96, 165, 250, 0.15); color: var(--info); }
 
   /* ===== CHECKBOX / RADIO ===== */
   .form-check {
@@ -1692,6 +1696,11 @@
     <div class="toast toast--error">
       <div class="toast-icon">&#10005;</div>
       <span class="toast-message">환경 변수 설정 중 오류가 발생했습니다.</span>
+      <button class="toast-dismiss">&#10005;</button>
+    </div>
+    <div class="toast toast--info">
+      <div class="toast-icon">i</div>
+      <span class="toast-message">새로운 버전 v2.4.0이 출시되었습니다. 변경 사항을 확인해 보세요.</span>
       <button class="toast-dismiss">&#10005;</button>
     </div>
   </div>
