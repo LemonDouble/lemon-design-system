@@ -157,6 +157,23 @@
 
   .nav-right { display: flex; gap: 12px; align-items: center; }
 
+  /* ===== ICONS ===== */
+  .icon-row { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
+  .icon-group { display: flex; align-items: center; gap: 14px; color: var(--color-fg-secondary); }
+  .icon-group + .icon-group { padding-left: 24px; border-left: 1px solid var(--color-border); }
+  .icon-search { position: relative; width: 280px; display: flex; }
+  .icon-search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--color-fg-muted); pointer-events: none; }
+  .icon-search .input { width: 100%; min-width: 0; padding-left: 42px; }
+  .brand-link { display: inline-flex; padding: 6px; border-radius: var(--radius-md); color: var(--color-fg-muted); transition: color 0.15s; }
+  .brand-link:hover { color: var(--color-fg); }
+  .brand-icon {
+    width: 20px;
+    height: 20px;
+    background-color: currentColor;
+    -webkit-mask: var(--icon) center / contain no-repeat;
+    mask: var(--icon) center / contain no-repeat;
+  }
+
   /* ===== BUTTONS ===== */
   .btn {
     display: inline-flex;
@@ -1681,6 +1698,47 @@
     <div>
       <span style="font-size:12px;color:var(--color-fg-muted);display:block;margin-bottom:4px;">Pretendard 600 — 14px / Label</span>
       <span style="font-size:14px;font-weight:600;color:var(--color-fg);">버튼, 태그, 강조 레이블에 사용합니다.</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ICONS -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-label">Foundation</div>
+    <div class="section-title galmuri">Icons</div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:32px;">
+    <div>
+      <span style="font-size:12px;color:var(--color-fg-muted);display:block;margin-bottom:12px;">Lucide — 16px 버튼·태그 / 20px 본문 / 24px 네비게이션 · stroke 2px · 색은 currentColor</span>
+      <div class="icon-row">
+        <div class="icon-group"><i data-lucide="search" width="16" height="16" stroke-width="2"></i><i data-lucide="settings" width="16" height="16" stroke-width="2"></i><i data-lucide="bell" width="16" height="16" stroke-width="2"></i><i data-lucide="download" width="16" height="16" stroke-width="2"></i><i data-lucide="external-link" width="16" height="16" stroke-width="2"></i></div>
+        <div class="icon-group"><i data-lucide="search" width="20" height="20" stroke-width="2"></i><i data-lucide="settings" width="20" height="20" stroke-width="2"></i><i data-lucide="bell" width="20" height="20" stroke-width="2"></i><i data-lucide="download" width="20" height="20" stroke-width="2"></i><i data-lucide="external-link" width="20" height="20" stroke-width="2"></i></div>
+        <div class="icon-group"><i data-lucide="search" width="24" height="24" stroke-width="2"></i><i data-lucide="settings" width="24" height="24" stroke-width="2"></i><i data-lucide="bell" width="24" height="24" stroke-width="2"></i><i data-lucide="download" width="24" height="24" stroke-width="2"></i><i data-lucide="external-link" width="24" height="24" stroke-width="2"></i></div>
+      </div>
+    </div>
+    <div>
+      <span style="font-size:12px;color:var(--color-fg-muted);display:block;margin-bottom:12px;">문맥별 사용 — 아이콘은 주변 텍스트 색을 따른다</span>
+      <div class="icon-row">
+        <button class="btn btn-primary"><i data-lucide="download" width="16" height="16"></i>다운로드</button>
+        <button class="btn btn-ghost"><i data-lucide="external-link" width="16" height="16"></i>새 창에서 열기</button>
+        <div class="icon-search"><i data-lucide="search" width="20" height="20"></i><input type="text" class="input" placeholder="검색어를 입력하세요"></div>
+        <a href="#" class="nav-link active" style="display:inline-flex;align-items:center;gap:6px;"><i data-lucide="house" width="24" height="24"></i>홈</a>
+      </div>
+    </div>
+    <div>
+      <span style="font-size:12px;color:var(--color-fg-muted);display:block;margin-bottom:12px;">Simple Icons(브랜드) — 기본 Text Muted, 호버 시 Text Primary · Twitter는 images/twitter-bird.svg</span>
+      <div class="icon-row" style="gap:8px;">
+        <a href="#" class="brand-link" aria-label="GitHub" title="GitHub"><span class="brand-icon" style="--icon:url('https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/github.svg')"></span></a>
+        <a href="#" class="brand-link" aria-label="Discord" title="Discord"><span class="brand-icon" style="--icon:url('https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/discord.svg')"></span></a>
+        <a href="#" class="brand-link" aria-label="Notion" title="Notion"><span class="brand-icon" style="--icon:url('https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/notion.svg')"></span></a>
+        <a href="#" class="brand-link" aria-label="KakaoTalk" title="KakaoTalk"><span class="brand-icon" style="--icon:url('https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/kakaotalk.svg')"></span></a>
+        <a href="#" class="brand-link" aria-label="YouTube" title="YouTube"><span class="brand-icon" style="--icon:url('https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons/youtube.svg')"></span></a>
+        <a href="#" class="brand-link" aria-label="Twitter" title="Twitter"><span class="brand-icon" style="--icon:url('images/twitter-bird.svg')"></span></a>
+      </div>
     </div>
   </div>
 </section>

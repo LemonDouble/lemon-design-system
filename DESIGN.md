@@ -48,7 +48,8 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
   - Size: 기본 20px (본문), 16px (버튼/태그 내), 24px (네비게이션)
   - Stroke width: 2px (기본), 1.5px (큰 사이즈에서)
   - Color: 주변 텍스트 색상을 따른다 (`currentColor`)
-- **브랜드 아이콘**: [Simple Icons](https://simpleicons.org/) — GitHub, Slack 등 브랜드 로고 전용.
+- **브랜드 아이콘**: [Simple Icons](https://simpleicons.org/) — GitHub, Discord 등 브랜드 로고 전용.
+  - Slack, LinkedIn처럼 브랜드 측 요청으로 삭제된 아이콘도 있으므로, 쓰기 전에 고정한 버전에 해당 아이콘이 있는지 확인한다.
   - CDN: `https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons`
   - React: `@icons-pack/react-simple-icons`
   - Color: `var(--color-fg-muted)` 기본, 호버 시 `var(--color-fg)`
