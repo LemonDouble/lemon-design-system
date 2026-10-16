@@ -16,7 +16,10 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - "이 사람 작품이구나" 라고 즉시 알아볼 수 있는 개인 브랜드 시스템
 
 ### Brand Images
-이 레포지토리의 `images/` 폴더에 있는 원본을 항상 사용한다.
+이 레포지토리의 `images/` 폴더에 있는 원본을 항상 사용한다. 프로젝트에는 아래 GitHub Pages URL에서 받아 복사해 넣는다.
+
+- 다운로드 URL: `https://lemondouble.github.io/lemon-design-system/` + 파일 경로
+  - 예: `https://lemondouble.github.io/lemon-design-system/images/lemon-logo.webp`
 
 | 파일 | 용도 | 사용처 |
 |------|------|--------|
