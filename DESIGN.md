@@ -4,12 +4,12 @@
 
 LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 아이덴티티를 부여하기 위한 다크 모드 기반 디자인 시스템이다. 로고에서 추출한 골든 옐로우(`#F0B90B`)와 코랄 레드(`#CD6B5E`)를 핵심 액센트로, 로고의 다크 브라운에서 파생된 따뜻한 다크 배경(`#12100E`)을 기반으로 한다. 순수 블랙이 아닌 미세한 따뜻함이 깔린 배경은 로고와 자연스러운 색상 연속성을 만든다.
 
-타이포그래피는 이중 폰트 시스템을 사용한다. 제목과 탭 등 브랜딩 요소에는 8bit 픽셀 폰트 **Galmuri11**을 Bold(700) 전용으로 사용하고, 그 외 본문, 버튼, 태그, 코드 블록 등 가독성이 필요한 모든 곳에는 **Pretendard**를 사용한다. Galmuri11은 레트로 게임 감성을 부여하면서도 Pretendard와의 조합으로 모던한 느낌을 동시에 유지한다.
+타이포그래피는 이중 폰트 시스템을 사용한다. 페이지 제목 등 브랜딩 요소에는 8bit 픽셀 폰트 **Galmuri11**을 Bold(700) 전용으로 사용하고, 그 외 본문, 버튼, 태그, 코드 블록 등 가독성이 필요한 모든 곳에는 **Pretendard**를 사용한다. Galmuri11은 레트로 게임 감성을 부여하면서도 Pretendard와의 조합으로 모던한 느낌을 동시에 유지한다.
 
 **Key Characteristics:**
 - 로고에서 추출한 골든 옐로우 + 코랄 레드 듀오톤 액센트
 - 로고 다크 브라운 파생 따뜻한 다크 배경 (`#12100E`, 순수 블랙이 아님)
-- Galmuri11 Bold(700) 전용 — 제목, 탭, 섹션 레이블에만 사용
+- Galmuri11 Bold(700) 전용 — 페이지 제목(h1-h3), 섹션 레이블, Stat 숫자, 로고 텍스트에만 사용
 - Pretendard — 본문, 버튼, 태그, 코드 블록, 인라인 코드 등 나머지 전부
 - 다크 모드 단일 테마 (라이트 모드 없음)
 - "이 사람 작품이구나" 라고 즉시 알아볼 수 있는 개인 브랜드 시스템
@@ -100,7 +100,8 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 
 ### Galmuri11 사용 규칙
 - **반드시 font-weight: 700 (Bold)로만 사용한다.** Regular(400) 사용 금지.
-- 적용 범위: h1, h2, h3 제목 / 탭 레이블 / 섹션 레이블 (소제목 위 카테고리) / Stat 숫자 (큰 강조 숫자)
+- 적용 범위: 페이지 제목 h1, h2, h3 / 섹션 레이블 (소제목 위 카테고리) / Stat 숫자 (큰 강조 숫자) / Nav·Sidebar 로고 텍스트
+- 카드, 모달, Empty State 등 컴포넌트 안의 제목과 탭 레이블은 Pretendard를 사용한다.
 - 그 외 어떤 곳에도 Galmuri11을 사용하지 않는다.
 
 ### Hierarchy
@@ -109,13 +110,14 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 |------|------|------|--------|-------------|-------|
 | Hero Heading | Galmuri11 | 44px | 700 | 1.2 | 히어로 섹션 메인 제목 |
 | Section Title | Galmuri11 | 28px | 700 | 1.3 | 섹션 제목 |
-| Card/Sub Title | Galmuri11 | 20px | 700 | 1.4 | 카드 헤딩, 소제목 |
+| Sub Title | Galmuri11 | 20px | 700 | 1.4 | 페이지 소제목 (h3) |
 | Section Label | Galmuri11 | 12px | 700 | 1.0 | 섹션 위 카테고리 레이블, letter-spacing: 1.5px, uppercase |
-| Tab Label | Galmuri11 | 14px | 700 | 1.0 | 네비게이션 탭 |
 | Stat Number | Galmuri11 | 32px | 700 | 1.0 | 숫자 강조 카드 |
+| Component Title | Pretendard | 15-17px | 700 | 1.4 | 카드, 모달, Empty State 제목 |
 | Body Large | Pretendard | 18px | 400 | 1.7 | 히어로 설명, 긴 본문 |
 | Body | Pretendard | 16px | 400 | 1.6 | 표준 본문 |
 | Body Small | Pretendard | 14px | 400 | 1.6 | 카드 설명, 테이블 내용 |
+| Interactive Text | Pretendard | 14px | 500 | 1.0 | Nav 링크, 탭, 페이지네이션, Breadcrumb 현재 항목 |
 | Label / Button | Pretendard | 14px | 600 | 1.0 | 버튼 텍스트, 강조 레이블 |
 | Tag / Badge | Pretendard | 12px | 600 | 1.0 | 태그, 배지, Chip |
 | Caption / Meta | Pretendard | 12px-13px | 400 | 1.0 | 메타데이터, 줄번호 |
@@ -125,7 +127,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 ### Principles
 - **Galmuri11은 브랜딩 전용**: 제목과 레이블에서만 사용하여 8bit 감성을 포인트로 부여한다. 본문이나 UI 요소에 Galmuri를 사용하면 가독성이 떨어진다.
 - **Pretendard가 기본**: 의심스러우면 Pretendard를 쓴다. 코드 블록도, 인라인 코드도, 태그도 전부 Pretendard.
-- **Weight 절제**: Galmuri11은 700 단일 weight. Pretendard는 400(본문), 600(레이블/버튼), 700(카드 제목) 세 가지만 사용.
+- **Weight 절제**: Galmuri11은 700 단일 weight. Pretendard는 400(본문), 500(링크/탭 등 인터랙티브 텍스트), 600(레이블/버튼), 700(컴포넌트 제목) 네 가지만 사용.
 
 ## 4. Component Stylings
 
@@ -428,7 +430,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 
 ### Do
 - Galmuri11은 반드시 `font-weight: 700` (Bold)으로만 사용한다
-- Galmuri11은 제목(h1-h3), 탭 레이블, 섹션 레이블, Stat 숫자에만 사용한다
+- Galmuri11은 페이지 제목(h1-h3), 섹션 레이블, Stat 숫자, 로고 텍스트에만 사용한다
 - 가독성이 필요한 모든 곳에 Pretendard를 사용한다 (태그, 코드, 버튼 포함)
 - 배경색은 `#12100E`를 사용한다 (순수 `#000000` 아님)
 - 텍스트는 `#F5F0EB`를 사용한다 (순수 `#FFFFFF` 아님) — 따뜻한 톤 유지
@@ -483,7 +485,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - Text muted: `#5C524A`
 
 ### Font Quick Reference
-- 제목/탭: `font-family: 'Galmuri11', monospace; font-weight: 700;`
+- 페이지 제목/섹션 레이블: `font-family: 'Galmuri11', monospace; font-weight: 700;`
 - 그 외 전부: `font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;`
 
 ### Example Component Prompts
@@ -493,7 +495,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - "네비게이션 바를 만들어줘. 높이 56px, sticky top. 배경 rgba(18,16,14,0.85) + backdrop-filter blur(12px). 왼쪽에 로고 32px + Galmuri11 Bold 16px #F0B90B 텍스트. 링크는 Pretendard 14px weight 500 #A89E95, active는 #F0B90B + rgba(240,185,11,0.12) 배경."
 
 ### Iteration Guide
-1. 항상 Galmuri11은 Bold(700)으로만, 제목/탭/레이블에만 적용
+1. 항상 Galmuri11은 Bold(700)으로만, 페이지 제목/섹션 레이블에만 적용
 2. 의심스러우면 Pretendard를 쓴다 — 가독성이 최우선
 3. 순수 블랙/화이트 대신 따뜻한 변형 사용 (#12100E / #F5F0EB)
 4. 깊이는 shadow 없이 border + 배경색 차이로 표현
