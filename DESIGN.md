@@ -98,10 +98,10 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
   --success-subtle: rgba(74, 222, 128, 0.06);
   --success-dim: rgba(74, 222, 128, 0.12);
   --success-dim-border: rgba(74, 222, 128, 0.25);
-  --warning: #FACC15;
-  --warning-subtle: rgba(250, 204, 21, 0.06);
-  --warning-dim: rgba(250, 204, 21, 0.12);
-  --warning-dim-border: rgba(250, 204, 21, 0.25);
+  --warning: #F59E0B;
+  --warning-subtle: rgba(245, 158, 11, 0.06);
+  --warning-dim: rgba(245, 158, 11, 0.12);
+  --warning-dim-border: rgba(245, 158, 11, 0.25);
   --error: #EF4444;
   --error-subtle: rgba(239, 68, 68, 0.06);
   --error-dim: rgba(239, 68, 68, 0.12);
@@ -165,6 +165,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - **Warning** `--warning`: 경고, 진행 중 상태.
 - **Error** `--error`: 에러, 삭제, 위험 상태.
 - 상태마다 틴트 토큰 세 가지를 둔다: `-subtle`(Toast처럼 넓은 영역의 배경), `-dim`(배지, 아이콘 배경), `-dim-border`(테두리).
+- 상태는 색만으로 전달하지 않는다. 아이콘, 텍스트 레이블, 툴팁 중 하나를 항상 함께 둔다([WCAG 1.4.1](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html)). 액센트가 따뜻한 색에 몰려 있어 Warning은 Primary와, Error는 Secondary와 색만으로는 구분이 어렵기 때문이다.
 
 ### Disabled State
 - **Opacity**: `0.4` — 모든 비활성 요소에 일괄 적용
@@ -345,6 +346,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - Size: 8px
 - Radius: 50%
 - Info: `var(--info)`, Success: `var(--success)`, Warning: `var(--warning)`, Error: `var(--error)`
+- 점만 단독으로 쓰지 않는다. 옆에 텍스트 레이블을 두거나, 최소한 `title`과 `aria-label`로 상태 이름을 제공한다.
 
 ### Tabs
 - Container: border-bottom 1px solid `var(--border)`
