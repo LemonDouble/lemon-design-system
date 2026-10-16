@@ -51,77 +51,104 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - **브랜드 아이콘**: [Simple Icons](https://simpleicons.org/) — GitHub, Slack 등 브랜드 로고 전용.
   - CDN: `https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons`
   - React: `@icons-pack/react-simple-icons`
-  - Color: `var(--text-muted)` 기본, 호버 시 `var(--text-primary)`
+  - Color: `var(--color-fg-muted)` 기본, 호버 시 `var(--color-fg)`
   - **예외 — Twitter**: Simple Icons의 X 로고 대신 `images/twitter-bird.svg`(클래식 트위터 새 로고)를 사용한다. `fill: currentColor`로 되어 있어 CSS 색상을 따른다.
 - **기술 스택 아이콘**: [devicon](https://devicon.dev/) — 블로그 등 기술 스택 표시 용도 (보조).
 
 ## 2. Design Tokens
 
-모든 값은 아래 토큰 블록에서 정의한다. 프로젝트에는 이 블록을 그대로 복사해 넣고, 컴포넌트 스타일에서는 항상 `var(--토큰)`으로 참조한다.
+모든 값은 아래 두 블록(Theme, Layer)에서 정의한다. 토큰 이름은 [Tailwind CSS v4의 테마 변수 규칙](https://tailwindcss.com/docs/theme)(`--color-*`, `--font-*`, `--radius-*`)을 따르므로, Tailwind 프로젝트와 일반 CSS 프로젝트가 같은 이름을 쓴다.
 
 - 토큰에 있는 값을 hex나 rgba로 직접 쓰지 않는다. 값을 바꿀 때 이 블록 한 곳만 고치면 되도록 하기 위함이다.
 - 토큰에 없는 일회성 값(예: Code Block 헤더 배경)은 해당 컴포넌트 스펙에 적힌 값을 그대로 쓴다.
+- 토큰 이름을 프로젝트마다 바꾸지 않는다(`--color-bg`를 `--color-page`로 바꾸는 등).
+
+### 적용 방법
+- **Tailwind CSS v4**: Theme 블록은 `@theme { }` 안에, Layer 블록은 `:root { }` 안에 넣는다. `bg-surface`, `text-fg-muted`, `border-border`, `rounded-xl`, `font-heading` 같은 유틸리티 클래스가 생성된다.
+- **일반 CSS**: 두 블록을 모두 `:root { }` 안에 넣는다.
+- 두 경우 모두 CSS에서 `var(--color-primary)`처럼 참조할 수 있다. Tailwind v4는 `@theme` 변수를 `:root`에도 내보낸다.
+- radius 토큰은 Tailwind 기본값과 이름·값이 같으므로, Tailwind 프로젝트에서는 생략해도 된다.
+- 폰트 CDN의 `@import`는 `@import "tailwindcss"`보다 위에 둔다.
 
 ```css
-:root {
+/* Tailwind CSS v4 전역 CSS 예시 */
+@import url("https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono@5.2.8/index.css");
+@import "tailwindcss";
+
+@theme { /* Theme 블록 */ }
+:root { /* Layer 블록 */ }
+```
+
+### Theme 블록
+
+```css
+@theme {
   /* Brand */
-  --primary: #F0B90B;
-  --primary-hover: #D4A30A;
-  --primary-dim: rgba(240, 185, 11, 0.12);
-  --primary-dim-border: rgba(240, 185, 11, 0.25);
-  --secondary: #CD6B5E;
-  --secondary-dim: rgba(205, 107, 94, 0.12);
-  --secondary-dim-border: rgba(205, 107, 94, 0.25);
+  --color-primary: #F0B90B;
+  --color-primary-hover: #D4A30A;
+  --color-primary-dim: rgba(240, 185, 11, 0.12);
+  --color-primary-dim-border: rgba(240, 185, 11, 0.25);
+  --color-secondary: #CD6B5E;
+  --color-secondary-dim: rgba(205, 107, 94, 0.12);
+  --color-secondary-dim-border: rgba(205, 107, 94, 0.25);
 
   /* Background & Surface */
-  --bg: #12100E;
-  --bg-glass: rgba(18, 16, 14, 0.85);
-  --surface: #1C1816;
-  --surface-hover: #231E1B;
-  --overlay: rgba(0, 0, 0, 0.6);
+  --color-bg: #12100E;
+  --color-bg-glass: rgba(18, 16, 14, 0.85);
+  --color-surface: #1C1816;
+  --color-surface-hover: #231E1B;
+  --color-overlay: rgba(0, 0, 0, 0.6);
 
   /* Border */
-  --border: #2E2723;
-  --border-hover: #3D3530;
+  --color-border: #2E2723;
+  --color-border-hover: #3D3530;
 
   /* Text */
-  --text-primary: #F5F0EB;
-  --text-secondary: #A89E95;
-  --text-muted: #8D7E72;
+  --color-fg: #F5F0EB;
+  --color-fg-secondary: #A89E95;
+  --color-fg-muted: #8D7E72;
 
   /* Focus */
-  --focus-ring: var(--text-muted);
+  --color-focus-ring: var(--color-fg-muted);
 
   /* Semantic */
-  --info: #60A5FA;
-  --info-subtle: rgba(96, 165, 250, 0.06);
-  --info-dim: rgba(96, 165, 250, 0.12);
-  --info-dim-border: rgba(96, 165, 250, 0.25);
-  --success: #4ADE80;
-  --success-subtle: rgba(74, 222, 128, 0.06);
-  --success-dim: rgba(74, 222, 128, 0.12);
-  --success-dim-border: rgba(74, 222, 128, 0.25);
-  --warning: #F59E0B;
-  --warning-subtle: rgba(245, 158, 11, 0.06);
-  --warning-dim: rgba(245, 158, 11, 0.12);
-  --warning-dim-border: rgba(245, 158, 11, 0.25);
-  --error: #EF4444;
-  --error-subtle: rgba(239, 68, 68, 0.06);
-  --error-dim: rgba(239, 68, 68, 0.12);
-  --error-dim-border: rgba(239, 68, 68, 0.25);
+  --color-info: #60A5FA;
+  --color-info-subtle: rgba(96, 165, 250, 0.06);
+  --color-info-dim: rgba(96, 165, 250, 0.12);
+  --color-info-dim-border: rgba(96, 165, 250, 0.25);
+  --color-success: #4ADE80;
+  --color-success-subtle: rgba(74, 222, 128, 0.06);
+  --color-success-dim: rgba(74, 222, 128, 0.12);
+  --color-success-dim-border: rgba(74, 222, 128, 0.25);
+  --color-warning: #F59E0B;
+  --color-warning-subtle: rgba(245, 158, 11, 0.06);
+  --color-warning-dim: rgba(245, 158, 11, 0.12);
+  --color-warning-dim-border: rgba(245, 158, 11, 0.25);
+  --color-error: #EF4444;
+  --color-error-subtle: rgba(239, 68, 68, 0.06);
+  --color-error-dim: rgba(239, 68, 68, 0.12);
+  --color-error-dim-border: rgba(239, 68, 68, 0.25);
 
   /* Font */
   --font-heading: 'Galmuri11', monospace;
-  --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono Variable', 'Pretendard', monospace;
 
   /* Radius */
-  --radius-xs: 4px;
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
   --radius-full: 9999px;
+}
+```
 
+### Layer 블록
+
+```css
+:root {
   /* Z-index */
   --z-base: 0;
   --z-dropdown: 100;
@@ -138,35 +165,35 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 각 색상의 의미와 사용처를 설명한다. 값은 [Design Tokens](#2-design-tokens)의 토큰 블록을 따른다.
 
 ### Brand (로고에서 추출)
-- **Lemon Yellow** `--primary`: CTA 버튼, 링크, 강조 텍스트, 활성 상태, 섹션 제목 색상. 호버는 `--primary-hover`.
-- **Coral Red** `--secondary`: 보조 강조, 태그 배경, 인라인 코드 텍스트, 보조 버튼.
+- **Lemon Yellow** `--color-primary`: CTA 버튼, 링크, 강조 텍스트, 활성 상태, 섹션 제목 색상. 호버는 `--color-primary-hover`.
+- **Coral Red** `--color-secondary`: 보조 강조, 태그 배경, 인라인 코드 텍스트, 보조 버튼.
 
 ### Background & Surface
-- **BG Dark** `--bg`: 페이지 배경. 로고의 다크 브라운(`#5C4A42`)에서 파생, 미세한 따뜻함.
-- **BG Glass** `--bg-glass`: 고정 네비게이션의 반투명 배경.
-- **Surface** `--surface`: 카드, 코드 블록, 입력 필드 배경.
-- **Surface Hover** `--surface-hover`: Surface 요소 호버 상태.
-- **Overlay** `--overlay`: 모달 뒤 배경을 가리는 오버레이.
+- **BG Dark** `--color-bg`: 페이지 배경. 로고의 다크 브라운(`#5C4A42`)에서 파생, 미세한 따뜻함.
+- **BG Glass** `--color-bg-glass`: 고정 네비게이션의 반투명 배경.
+- **Surface** `--color-surface`: 카드, 코드 블록, 입력 필드 배경.
+- **Surface Hover** `--color-surface-hover`: Surface 요소 호버 상태.
+- **Overlay** `--color-overlay`: 모달 뒤 배경을 가리는 오버레이.
 
 ### Border
-- **Border** `--border`: 카드 테두리, 구분선, 입력 필드 테두리.
-- **Border Hover** `--border-hover`: 호버 상태의 테두리.
+- **Border** `--color-border`: 카드 테두리, 구분선, 입력 필드 테두리.
+- **Border Hover** `--color-border-hover`: 호버 상태의 테두리.
 
 ### Text
-- **Text Primary** `--text-primary`: 제목, 카드 제목, 주요 텍스트. 순백이 아닌 미세한 따뜻함.
-- **Text Secondary** `--text-secondary`: 본문, 설명, 부가 텍스트.
-- **Text Muted** `--text-muted`: 메타데이터, 비활성 텍스트, 줄번호, placeholder.
+- **Text Primary** `--color-fg`: 제목, 카드 제목, 주요 텍스트. 순백이 아닌 미세한 따뜻함.
+- **Text Secondary** `--color-fg-secondary`: 본문, 설명, 부가 텍스트.
+- **Text Muted** `--color-fg-muted`: 메타데이터, 비활성 텍스트, 줄번호, placeholder.
 - 모든 텍스트 색상은 BG와 Surface 위에서 대비 4.5:1(WCAG AA) 이상을 유지한다. Text Muted는 이 기준의 하한선이므로 더 어둡게 바꾸지 않는다.
 
 ### Accent Dim (배경 틴트용)
-- `--primary-dim`, `--secondary-dim`: 배지, 태그, 활성 항목의 배경.
-- `--primary-dim-border`, `--secondary-dim-border`: 액센트 요소의 테두리, 카드 호버 테두리.
+- `--color-primary-dim`, `--color-secondary-dim`: 배지, 태그, 활성 항목의 배경.
+- `--color-primary-dim-border`, `--color-secondary-dim-border`: 액센트 요소의 테두리, 카드 호버 테두리.
 
 ### Semantic
-- **Info** `--info`: 안내, 정보, 알림 상태.
-- **Success** `--success`: 정상, 활성, 완료 상태.
-- **Warning** `--warning`: 경고, 진행 중 상태.
-- **Error** `--error`: 에러, 삭제, 위험 상태.
+- **Info** `--color-info`: 안내, 정보, 알림 상태.
+- **Success** `--color-success`: 정상, 활성, 완료 상태.
+- **Warning** `--color-warning`: 경고, 진행 중 상태.
+- **Error** `--color-error`: 에러, 삭제, 위험 상태.
 - 상태마다 틴트 토큰 세 가지를 둔다: `-subtle`(Toast처럼 넓은 영역의 배경), `-dim`(배지, 아이콘 배경), `-dim-border`(테두리).
 - 상태는 색만으로 전달하지 않는다. 아이콘, 텍스트 레이블, 툴팁 중 하나를 항상 함께 둔다([WCAG 1.4.1](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html)). 액센트가 따뜻한 색에 몰려 있어 Warning은 Primary와, Error는 Secondary와 색만으로는 구분이 어렵기 때문이다.
 
@@ -175,13 +202,13 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - **Cursor**: `not-allowed`
 - **Pointer Events**: `none`
 - 적용 대상: 버튼, 입력 필드, 토글, 체크박스, 라디오, 셀렉트
-- 입력 필드 비활성: 배경 `var(--surface)`, 텍스트 `var(--text-muted)` + opacity 0.4
+- 입력 필드 비활성: 배경 `var(--color-surface)`, 텍스트 `var(--color-fg-muted)` + opacity 0.4
 
 ### Focus State
-- 전역 포커스 링: `:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }` 하나로 모든 인터랙티브 요소를 처리한다. 컴포넌트마다 포커스 스타일을 따로 정의하지 않는다.
+- 전역 포커스 링: `:focus-visible { outline: 2px solid var(--color-focus-ring); outline-offset: 2px; }` 하나로 모든 인터랙티브 요소를 처리한다. 컴포넌트마다 포커스 스타일을 따로 정의하지 않는다.
 - `:focus-visible`을 쓰므로 마우스 클릭에는 링이 나타나지 않고, 키보드로 이동할 때만 나타난다.
 - 예외 — `overflow: hidden` 컨테이너 안에 꽉 차는 요소(Accordion trigger 등): 링이 잘리지 않도록 `outline-offset: -2px`로 안쪽에 그린다.
-- 예외 — 텍스트 입력 요소(Input, Select, Textarea): 클릭해도 `:focus-visible`이 적용되므로 링 대신 `outline: none` + `border-color: var(--focus-ring)`로 표시한다.
+- 예외 — 텍스트 입력 요소(Input, Select, Textarea): 클릭해도 `:focus-visible`이 적용되므로 링 대신 `outline: none` + `border-color: var(--color-focus-ring)`로 표시한다.
 - 포커스 표시는 주변과 대비 3:1 이상이어야 한다([WCAG 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html)). 투명도가 낮은 `-dim-border` 토큰은 이 기준을 통과하지 못하므로 포커스 표시에 쓰지 않는다.
 - 포커스 색은 노란색(Primary)을 쓰지 않는다. Primary는 이미 활성·선택 상태를 뜻하므로, 포커스까지 노란색이면 "선택된 요소"와 "키보드가 가리키는 요소"가 구분되지 않는다.
 - 클릭할 수 있는 요소는 `<button>`, `<a href>`, `<input>` 같은 네이티브 요소로 만든다. `<div onclick>`은 키보드로 포커스를 받을 수 없다.
@@ -191,7 +218,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 ### Font Family
 - **Heading** `--font-heading`: `Galmuri11`, fallback: `monospace`
   - CDN: `https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css`
-- **Body** `--font-body`: `Pretendard`, fallback: `-apple-system, BlinkMacSystemFont, sans-serif`
+- **Body** `--font-sans`: `Pretendard`, fallback: `-apple-system, BlinkMacSystemFont, sans-serif`
   - CDN: `https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css`
 - **Mono** `--font-mono`: `JetBrains Mono Variable`, fallback: `Pretendard`, `monospace`
   - CDN: `https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono@5.2.8/index.css`
@@ -233,140 +260,140 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 ### Buttons
 
 **Primary**
-- Background: `var(--primary)`
-- Text: `var(--bg)` (배경색)
+- Background: `var(--color-primary)`
+- Text: `var(--color-bg)` (배경색)
 - Padding: 10px 20px
-- Radius: `var(--radius-md)`
+- Radius: `var(--radius-lg)`
 - Font: Pretendard 14px weight 600
-- Hover: background `var(--primary-hover)`
+- Hover: background `var(--color-primary-hover)`
 
 **Secondary (Outline)**
 - Background: transparent
-- Text: `var(--secondary)`
-- Border: 1px solid `var(--secondary-dim-border)`
+- Text: `var(--color-secondary)`
+- Border: 1px solid `var(--color-secondary-dim-border)`
 - Padding: 10px 20px
-- Radius: `var(--radius-md)`
+- Radius: `var(--radius-lg)`
 - Font: Pretendard 14px weight 600
-- Hover: background `var(--secondary-dim)`
+- Hover: background `var(--color-secondary-dim)`
 
 **Ghost**
 - Background: transparent
-- Text: `var(--text-secondary)`
-- Border: 1px solid `var(--border)`
+- Text: `var(--color-fg-secondary)`
+- Border: 1px solid `var(--color-border)`
 - Padding: 10px 20px
-- Radius: `var(--radius-md)`
+- Radius: `var(--radius-lg)`
 - Font: Pretendard 14px weight 600
-- Hover: border `var(--border-hover)`, text `var(--text-primary)`
+- Hover: border `var(--color-border-hover)`, text `var(--color-fg)`
 
-**Small variant**: font 13px, padding 6px 14px, radius `var(--radius-sm)`.
+**Small variant**: font 13px, padding 6px 14px, radius `var(--radius-md)`.
 
 ### Cards
-- Background: `var(--surface)`
-- Border: 1px solid `var(--border)`
-- Radius: `var(--radius-lg)`
+- Background: `var(--color-surface)`
+- Border: 1px solid `var(--color-border)`
+- Radius: `var(--radius-xl)`
 - Padding: 24px
-- Hover: border-color `var(--primary-dim-border)`
-- Card footer: `border-top: 1px solid var(--border)`, padding-top 16px, margin-top 16px
+- Hover: border-color `var(--color-primary-dim-border)`
+- Card footer: `border-top: 1px solid var(--color-border)`, padding-top 16px, margin-top 16px
 
 ### Tags / Badges
 - Font: Pretendard 12px weight 600
 - Padding: 4px 10px
 - Radius: `var(--radius-full)`
-- Primary variant: text `var(--primary)`, background `var(--primary-dim)`
-- Secondary variant: text `var(--secondary)`, background `var(--secondary-dim)`
-- Success variant: text `var(--success)`, background `var(--success-dim)`
+- Primary variant: text `var(--color-primary)`, background `var(--color-primary-dim)`
+- Secondary variant: text `var(--color-secondary)`, background `var(--color-secondary-dim)`
+- Success variant: text `var(--color-success)`, background `var(--color-success-dim)`
 
 ### Inputs
-- Background: `var(--surface)`
-- Border: 1px solid `var(--border)`
-- Radius: `var(--radius-md)`
+- Background: `var(--color-surface)`
+- Border: 1px solid `var(--color-border)`
+- Radius: `var(--radius-lg)`
 - Padding: 10px 16px
 - Font: Pretendard 14px
-- Text: `var(--text-primary)`
-- Placeholder: `var(--text-muted)`
-- Focus: border-color `var(--focus-ring)`
+- Text: `var(--color-fg)`
+- Placeholder: `var(--color-fg-muted)`
+- Focus: border-color `var(--color-focus-ring)`
 
 ### Code Block
-- Container: background `var(--surface)`, border 1px solid `var(--border)`, radius `var(--radius-lg)`
-- Header bar: background `rgba(0,0,0,0.15)`, border-bottom 1px solid `var(--border)`
-- Header에 트래픽 라이트 dots: Error(`var(--error)`), Warning(`var(--warning)`), Success(`var(--success)`)
+- Container: background `var(--color-surface)`, border 1px solid `var(--color-border)`, radius `var(--radius-xl)`
+- Header bar: background `rgba(0,0,0,0.15)`, border-bottom 1px solid `var(--color-border)`
+- Header에 트래픽 라이트 dots: Error(`var(--color-error)`), Warning(`var(--color-warning)`), Success(`var(--color-success)`)
 - Body: JetBrains Mono 14px, line-height 1.8
-- Syntax: keyword → `var(--primary)`, string → `var(--secondary)`, type → `var(--success)`, comment → `var(--text-muted)`
-- Line numbers: `var(--text-muted)`, 28px 너비, 우측 정렬, margin-right 20px
+- Syntax: keyword → `var(--color-primary)`, string → `var(--color-secondary)`, type → `var(--color-success)`, comment → `var(--color-fg-muted)`
+- Line numbers: `var(--color-fg-muted)`, 28px 너비, 우측 정렬, margin-right 20px
 
 ### Inline Code
 - Font: JetBrains Mono 13px weight 500
-- Background: `var(--surface)`
-- Border: 1px solid `var(--border)`
+- Background: `var(--color-surface)`
+- Border: 1px solid `var(--color-border)`
 - Padding: 2px 8px
-- Radius: `var(--radius-xs)`
-- Text color: `var(--secondary)`
+- Radius: `var(--radius-sm)`
+- Text color: `var(--color-secondary)`
 
 ### Callout / Alert
-- Radius: `var(--radius-lg)`
+- Radius: `var(--radius-xl)`
 - Padding: 16px 20px
 - Font: Pretendard 14px, line-height 1.6
-- Primary callout: background `var(--primary-dim)`, border `var(--primary-dim-border)`
-- Secondary callout: background `var(--secondary-dim)`, border `var(--secondary-dim-border)`
+- Primary callout: background `var(--color-primary-dim)`, border `var(--color-primary-dim-border)`
+- Secondary callout: background `var(--color-secondary-dim)`, border `var(--color-secondary-dim-border)`
 
 ### Navigation
 - Height: 56px
-- Background: `var(--bg-glass)` + `backdrop-filter: blur(12px)` (글래스 효과)
-- Border-bottom: 1px solid `var(--border)`
+- Background: `var(--color-bg-glass)` + `backdrop-filter: blur(12px)` (글래스 효과)
+- Border-bottom: 1px solid `var(--color-border)`
 - Position: sticky top 0
-- Logo: 32px, radius `var(--radius-md)`
-- Logo text: Galmuri11 Bold 16px, color `var(--primary)`
-- Links: Pretendard 14px weight 500, color `var(--text-secondary)`
-- Active link: color `var(--primary)`, background `var(--primary-dim)`
+- Logo: 32px, radius `var(--radius-lg)`
+- Logo text: Galmuri11 Bold 16px, color `var(--color-primary)`
+- Links: Pretendard 14px weight 500, color `var(--color-fg-secondary)`
+- Active link: color `var(--color-primary)`, background `var(--color-primary-dim)`
 - CTA: Small Primary button
 
 ### Table
-- Container: border 1px solid `var(--border)`, radius `var(--radius-lg)`, overflow hidden
-- Header: background `var(--surface)`
-- th: Pretendard 14px weight 600, color `var(--text-secondary)`, padding 12px 16px
-- td: Pretendard 14px, color `var(--text-primary)`, padding 12px 16px
-- Row divider: border-bottom 1px solid `var(--border)` (마지막 행 제외)
-- Row hover: background `var(--surface)`
+- Container: border 1px solid `var(--color-border)`, radius `var(--radius-xl)`, overflow hidden
+- Header: background `var(--color-surface)`
+- th: Pretendard 14px weight 600, color `var(--color-fg-secondary)`, padding 12px 16px
+- td: Pretendard 14px, color `var(--color-fg)`, padding 12px 16px
+- Row divider: border-bottom 1px solid `var(--color-border)` (마지막 행 제외)
+- Row hover: background `var(--color-surface)`
 
 ### Toggle
 - Markup: `<button type="button" role="switch" aria-checked="true|false">`
-- Track: 44x24px, radius `var(--radius-lg)`
-- Off: background `var(--border)`
-- On: background `var(--primary)`
+- Track: 44x24px, radius `var(--radius-xl)`
+- Off: background `var(--color-border)`
+- On: background `var(--color-primary)`
 - Thumb: 18px, white, 3px inset
 
 ### Progress Bar
-- Track: height 6px, background `var(--border)`, radius 3px
-- Fill: gradient `linear-gradient(90deg, var(--primary), var(--secondary))`
+- Track: height 6px, background `var(--color-border)`, radius 3px
+- Fill: gradient `linear-gradient(90deg, var(--color-primary), var(--color-secondary))`
 
 ### Avatar
 - Size: 36px
 - Radius: 50%
-- Border: 2px solid `var(--bg)` (배경색, 스택 겹침용)
+- Border: 2px solid `var(--color-bg)` (배경색, 스택 겹침용)
 - Stack: margin-left -8px (첫번째 제외)
 
 ### Status Dot
 - Size: 8px
 - Radius: 50%
-- Info: `var(--info)`, Success: `var(--success)`, Warning: `var(--warning)`, Error: `var(--error)`
+- Info: `var(--color-info)`, Success: `var(--color-success)`, Warning: `var(--color-warning)`, Error: `var(--color-error)`
 - 점만 단독으로 쓰지 않는다. 옆에 텍스트 레이블을 두거나, 최소한 `title`과 `aria-label`로 상태 이름을 제공한다.
 
 ### Tabs
-- Container: border-bottom 1px solid `var(--border)`
-- Tab item: Pretendard 14px weight 500, color `var(--text-muted)`
-- Active: color `var(--primary)`, border-bottom 2px solid `var(--primary)`
-- Hover: color `var(--text-secondary)`
+- Container: border-bottom 1px solid `var(--color-border)`
+- Tab item: Pretendard 14px weight 500, color `var(--color-fg-muted)`
+- Active: color `var(--color-primary)`, border-bottom 2px solid `var(--color-primary)`
+- Hover: color `var(--color-fg-secondary)`
 - Padding: 10px 20px
 
 ### Pagination
-- Item: min-width 36px, height 36px, radius `var(--radius-md)`
-- Font: Pretendard 14px weight 500, color `var(--text-secondary)`
-- Hover: background `var(--surface)`, border 1px solid `var(--border)`, color `var(--text-primary)`
-- Active: background `var(--primary)`, color `var(--bg)`, weight 600
+- Item: min-width 36px, height 36px, radius `var(--radius-lg)`
+- Font: Pretendard 14px weight 500, color `var(--color-fg-secondary)`
+- Hover: background `var(--color-surface)`, border 1px solid `var(--color-border)`, color `var(--color-fg)`
+- Active: background `var(--color-primary)`, color `var(--color-bg)`, weight 600
 - Disabled: opacity 0.4, pointer-events none
-- Ellipsis: color `var(--text-muted)`
+- Ellipsis: color `var(--color-fg-muted)`
 - Gap: 4px
-- **Page Jump**: 현재 페이지가 editable input. 우상단에 연필 아이콘(16px circle, `var(--surface)` 배경, `var(--border)` 테두리) badge로 편집 가능 표시. Focus 시 배경 `var(--surface)`, 텍스트 `var(--primary)`, border `var(--focus-ring)`로 전환.
+- **Page Jump**: 현재 페이지가 editable input. 우상단에 연필 아이콘(16px circle, `var(--color-surface)` 배경, `var(--color-border)` 테두리) badge로 편집 가능 표시. Focus 시 배경 `var(--color-surface)`, 텍스트 `var(--color-primary)`, border `var(--color-focus-ring)`로 전환.
 - **Page Jump 동작**:
   - 숫자만 허용 (`inputmode="numeric"` + 입력 시 non-digit 제거)
   - Focus 시 값을 비워 즉시 입력 가능한 상태로 전환
@@ -375,34 +402,34 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 
 ### Breadcrumb
 - Font: Pretendard 14px
-- Links: color `var(--text-muted)`, hover color `var(--primary)`
-- Separator: `/`, color `var(--text-muted)`, font-size 12px
-- Current: color `var(--text-primary)`, weight 500
+- Links: color `var(--color-fg-muted)`, hover color `var(--color-primary)`
+- Separator: `/`, color `var(--color-fg-muted)`, font-size 12px
+- Current: color `var(--color-fg)`, weight 500
 
 ### Dropdown Menu
-- Container: background `var(--surface)`, border 1px solid `var(--border)`, radius `var(--radius-md)`, padding 4px
-- Item: Pretendard 14px, padding 8px 12px, radius `var(--radius-sm)`
-- Item hover: background `var(--surface-hover)`, color `var(--text-primary)`
-- Active item: color `var(--primary)`
-- Destructive item: color `var(--error)`
+- Container: background `var(--color-surface)`, border 1px solid `var(--color-border)`, radius `var(--radius-lg)`, padding 4px
+- Item: Pretendard 14px, padding 8px 12px, radius `var(--radius-md)`
+- Item hover: background `var(--color-surface-hover)`, color `var(--color-fg)`
+- Active item: color `var(--color-primary)`
+- Destructive item: color `var(--color-error)`
 
 ### Select (Native)
 - appearance: none
-- Background: `var(--surface)`, border 1px solid `var(--border)`, radius `var(--radius-md)`
+- Background: `var(--color-surface)`, border 1px solid `var(--color-border)`, radius `var(--radius-lg)`
 - Padding: 10px 40px 10px 16px (우측에 화살표 공간)
 - Font: Pretendard 14px
-- Focus: border-color `var(--focus-ring)`
+- Focus: border-color `var(--color-focus-ring)`
 
 ### Checkbox
-- Size: 18px, radius `var(--radius-xs)`
-- Unchecked: background `var(--surface)`, border `var(--border)`
-- Checked: background `var(--primary)`, border `var(--primary)`, 체크 아이콘 (배경색)
+- Size: 18px, radius `var(--radius-sm)`
+- Unchecked: background `var(--color-surface)`, border `var(--color-border)`
+- Checked: background `var(--color-primary)`, border `var(--color-primary)`, 체크 아이콘 (배경색)
 - Focus: 전역 포커스 링
 
 ### Radio
 - Size: 18px, radius 50%
-- Unchecked: background `var(--surface)`, border `var(--border)`
-- Checked: border `var(--primary)`, inner dot `box-shadow: inset 0 0 0 4px var(--primary)`
+- Unchecked: background `var(--color-surface)`, border `var(--color-border)`
+- Checked: border `var(--color-primary)`, inner dot `box-shadow: inset 0 0 0 4px var(--color-primary)`
 - Focus: 전역 포커스 링
 
 ### Textarea
@@ -412,68 +439,68 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - line-height: 1.6
 
 ### Modal / Dialog
-- Overlay: background `var(--overlay)`, `backdrop-filter: blur(4px)`
-- Container: background `var(--surface)`, border 1px solid `var(--border)`, radius `var(--radius-lg)`, max-width 480px
+- Overlay: background `var(--color-overlay)`, `backdrop-filter: blur(4px)`
+- Container: background `var(--color-surface)`, border 1px solid `var(--color-border)`, radius `var(--radius-xl)`, max-width 480px
 - Header: padding 20px 24px, border-bottom, title Pretendard 15px weight 700
-- Close button: 32px, border 1px solid `var(--border)`, radius `var(--radius-sm)`
-- Body: padding 24px, Pretendard 14px, color `var(--text-secondary)`
+- Close button: 32px, border 1px solid `var(--color-border)`, radius `var(--radius-md)`
+- Body: padding 24px, Pretendard 14px, color `var(--color-fg-secondary)`
 - Footer: padding 16px 24px, border-top, 버튼 우측 정렬
 
 ### Toast / Notification
-- Container: padding 12px 16px, radius `var(--radius-md)`, border 1px solid
+- Container: padding 12px 16px, radius `var(--radius-lg)`, border 1px solid
 - Icon: 20px circle, 배경 틴트 + 아이콘 색상
-- Message: Pretendard 14px, color `var(--text-primary)`
-- Info: border `var(--info-dim-border)`, background `var(--info-subtle)`
-- Success: border `var(--success-dim-border)`, background `var(--success-subtle)`
-- Warning: border `var(--warning-dim-border)`, background `var(--warning-subtle)`
-- Error: border `var(--error-dim-border)`, background `var(--error-subtle)`
+- Message: Pretendard 14px, color `var(--color-fg)`
+- Info: border `var(--color-info-dim-border)`, background `var(--color-info-subtle)`
+- Success: border `var(--color-success-dim-border)`, background `var(--color-success-subtle)`
+- Warning: border `var(--color-warning-dim-border)`, background `var(--color-warning-subtle)`
+- Error: border `var(--color-error-dim-border)`, background `var(--color-error-subtle)`
 
 ### Tooltip
-- Background: `var(--text-primary)`, color `var(--bg)`
+- Background: `var(--color-fg)`, color `var(--color-bg)`
 - Font: Pretendard 12px weight 500
-- Padding: 6px 12px, radius `var(--radius-sm)`
+- Padding: 6px 12px, radius `var(--radius-md)`
 - Arrow: 5px border trick
 - Trigger: text에 border-bottom 1px dashed
 
 ### Blockquote
-- Border-left: 3px solid `var(--primary)`
-- Background: `var(--primary-dim)`
+- Border-left: 3px solid `var(--color-primary)`
+- Background: `var(--color-primary-dim)`
 - Padding: 12px 20px
-- Radius: `0 var(--radius-md) var(--radius-md) 0`
-- Font: Pretendard 15px, line-height 1.7, color `var(--text-secondary)`
+- Radius: `0 var(--radius-lg) var(--radius-lg) 0`
+- Font: Pretendard 15px, line-height 1.7, color `var(--color-fg-secondary)`
 
 ### List (ul/ol)
 - Padding-left: 24px
-- Font: Pretendard 15px, line-height 1.8, color `var(--text-secondary)`
-- Marker color: `var(--primary)`
+- Font: Pretendard 15px, line-height 1.8, color `var(--color-fg-secondary)`
+- Marker color: `var(--color-primary)`
 
 ### Sidebar Navigation
-- Width: 240px, background `var(--surface)`, border-right 1px solid `var(--border)`
-- Logo: Galmuri11 Bold 15px, color `var(--primary)`
-- Section label: Pretendard 11px weight 600, uppercase, letter-spacing 1px, color `var(--text-muted)`
-- Link: Pretendard 14px, padding 8px 12px, radius `var(--radius-sm)`
-- Active link: background `var(--primary-dim)`, color `var(--primary)`
-- Hover: background `var(--surface-hover)`
+- Width: 240px, background `var(--color-surface)`, border-right 1px solid `var(--color-border)`
+- Logo: Galmuri11 Bold 15px, color `var(--color-primary)`
+- Section label: Pretendard 11px weight 600, uppercase, letter-spacing 1px, color `var(--color-fg-muted)`
+- Link: Pretendard 14px, padding 8px 12px, radius `var(--radius-md)`
+- Active link: background `var(--color-primary-dim)`, color `var(--color-primary)`
+- Hover: background `var(--color-surface-hover)`
 
 ### Accordion
-- Container: border 1px solid `var(--border)`, radius `var(--radius-lg)`
-- Item divider: border-bottom 1px solid `var(--border)`
+- Container: border 1px solid `var(--color-border)`, radius `var(--radius-xl)`
+- Item divider: border-bottom 1px solid `var(--color-border)`
 - Trigger: Pretendard 15px weight 600, padding 16px 20px
-- Trigger hover: background `var(--surface)`
+- Trigger hover: background `var(--color-surface)`
 - Icon: 화살표, open 시 180도 회전
-- Body: Pretendard 14px, color `var(--text-secondary)`, padding 4px 20px 16px
+- Body: Pretendard 14px, color `var(--color-fg-secondary)`, padding 4px 20px 16px
 
 ### Skeleton Loading
-- Background: `var(--border)`
-- Radius: `var(--radius-sm)`
+- Background: `var(--color-border)`
+- Radius: `var(--radius-md)`
 - Animation: pulse (opacity 0.4 → 0.8), 1.5s ease-in-out infinite
-- Card container: background `var(--surface)` + border `var(--border)`
+- Card container: background `var(--color-surface)` + border `var(--color-border)`
 
 ### Empty State
-- Container: border 1px dashed `var(--border)`, radius `var(--radius-lg)`, padding 64px 32px
+- Container: border 1px dashed `var(--color-border)`, radius `var(--radius-xl)`, padding 64px 32px
 - Text-align: center
 - Title: Pretendard 17px weight 700
-- Description: Pretendard 14px, color `var(--text-muted)`
+- Description: Pretendard 14px, color `var(--color-fg-muted)`
 - CTA: Primary button
 
 ## 6. Layout Principles
@@ -491,14 +518,14 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - 수평 padding: 32px
 
 ### Divider
-- `border-top: 1px solid var(--border)`
+- `border-top: 1px solid var(--color-border)`
 - 섹션 사이에 사용, max-width 1016px, 좌우 auto margin
 
 ### Border Radius Scale
-- `--radius-xs` (4px): 인라인 코드, 체크박스
-- `--radius-sm` (6px): 작은 버튼, 드롭다운 항목, 툴팁
-- `--radius-md` (8px): 버튼, 입력 필드, 로고
-- `--radius-lg` (12px): 카드, 코드 블록, 테이블, callout, 모달
+- `--radius-sm` (4px): 인라인 코드, 체크박스
+- `--radius-md` (6px): 작은 버튼, 드롭다운 항목, 툴팁
+- `--radius-lg` (8px): 버튼, 입력 필드, 로고
+- `--radius-xl` (12px): 카드, 코드 블록, 테이블, callout, 모달
 - `--radius-full` (9999px): 태그, 배지, 히어로 배지
 - Circle (50%): 아바타, 상태 점, 토글 thumb
 
@@ -509,9 +536,9 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 | Level | Treatment | Use |
 |-------|-----------|-----|
 | Flat (Level 0) | 없음 | 페이지 배경 |
-| Surface (Level 1) | background `var(--surface)` + border `var(--border)` | 카드, 코드 블록, 입력 필드 |
-| Glass (Level 2) | background `var(--bg-glass)` + `backdrop-filter: blur(12px)` | 고정 네비게이션 |
-| Hover (Level 1+) | border-color → `var(--primary-dim-border)` | 카드 호버 |
+| Surface (Level 1) | background `var(--color-surface)` + border `var(--color-border)` | 카드, 코드 블록, 입력 필드 |
+| Glass (Level 2) | background `var(--color-bg-glass)` + `backdrop-filter: blur(12px)` | 고정 네비게이션 |
+| Hover (Level 1+) | border-color → `var(--color-primary-dim-border)` | 카드 호버 |
 
 **Shadow 미사용 원칙**: 따뜻한 다크 배경 위에서는 shadow보다 border가 더 자연스럽다. 깊이는 배경색 차이(BG → Surface)와 border로 표현한다.
 
@@ -533,12 +560,12 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - Galmuri11은 반드시 `font-weight: 700` (Bold)으로만 사용한다
 - Galmuri11은 페이지 제목(h1-h3), 섹션 레이블, Stat 숫자, 로고 텍스트에만 사용한다
 - 가독성이 필요한 모든 곳에 Pretendard를 사용한다 (태그, 버튼 포함). 코드에만 JetBrains Mono를 사용한다
-- 배경색은 `var(--bg)`를 사용한다 (순수 `#000000` 아님)
-- 텍스트는 `var(--text-primary)`를 사용한다 (순수 `#FFFFFF` 아님) — 따뜻한 톤 유지
-- Primary(`var(--primary)`)는 CTA, 링크, 활성 상태 등 "행동 유도" 요소에 사용한다
-- Secondary(`var(--secondary)`)는 보조 강조, 태그, 인라인 코드에 사용한다
+- 배경색은 `var(--color-bg)`를 사용한다 (순수 `#000000` 아님)
+- 텍스트는 `var(--color-fg)`를 사용한다 (순수 `#FFFFFF` 아님) — 따뜻한 톤 유지
+- Primary(`var(--color-primary)`)는 CTA, 링크, 활성 상태 등 "행동 유도" 요소에 사용한다
+- Secondary(`var(--color-secondary)`)는 보조 강조, 태그, 인라인 코드에 사용한다
 - 태그/배지는 `-dim` 토큰 배경 + 액센트 텍스트 조합을 사용한다
-- 카드 호버에는 `border-color: var(--primary-dim-border)`를 사용한다
+- 카드 호버에는 `border-color: var(--color-primary-dim-border)`를 사용한다
 
 ### Don't
 - Galmuri11을 Regular(400) weight로 사용하지 않는다
@@ -576,24 +603,25 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 ## 10. Agent Prompt Guide
 
 ### Token Setup
-- 작업을 시작할 때 [Design Tokens](#2-design-tokens)의 토큰 블록을 프로젝트 전역 CSS의 `:root`에 그대로 복사한다.
-- 자주 쓰는 토큰: 배경 `--bg`, 카드 `--surface`, 테두리 `--border`, 제목 `--text-primary`, 본문 `--text-secondary`, CTA `--primary`, 보조 강조 `--secondary`
+- 작업을 시작할 때 [Design Tokens](#2-design-tokens)의 Theme·Layer 블록을 [적용 방법](#적용-방법)대로 프로젝트 전역 CSS에 그대로 복사한다.
+- 자주 쓰는 토큰: 배경 `--color-bg`, 카드 `--color-surface`, 테두리 `--color-border`, 제목 `--color-fg`, 본문 `--color-fg-secondary`, CTA `--color-primary`, 보조 강조 `--color-secondary`
+- Tailwind 프로젝트에서는 같은 토큰을 유틸리티로 쓴다: `bg-bg`, `bg-surface`, `border-border`, `text-fg`, `text-fg-secondary`, `bg-primary`, `text-secondary`
 
 ### Font Quick Reference
 - 페이지 제목/섹션 레이블: `font-family: var(--font-heading); font-weight: 700;`
 - 코드: `font-family: var(--font-mono);`
-- 그 외 전부: `font-family: var(--font-body);`
+- 그 외 전부: `font-family: var(--font-sans);` (Tailwind에서는 `--font-sans`가 기본 본문 폰트라서 따로 지정하지 않아도 된다)
 
 ### Example Component Prompts
-- "히어로 섹션을 만들어줘. 배경 `var(--bg)`. 제목은 Galmuri11 Bold 44px, 색상 `var(--text-primary)`, 강조 단어는 `var(--primary)`. 설명은 Pretendard 18px, 색상 `var(--text-secondary)`. Primary 버튼(`var(--primary)` 배경, `var(--bg)` 텍스트, radius `var(--radius-md)`)과 Ghost 버튼(transparent, `var(--border)` border)."
-- "프로젝트 카드를 만들어줘. 배경 `var(--surface)`, border 1px solid `var(--border)`, radius `var(--radius-lg)`, padding 24px. 태그는 Pretendard 12px weight 600, `var(--primary)` 텍스트, `var(--primary-dim)` 배경, radius `var(--radius-full)`. 제목 Pretendard 17px weight 700. 설명 Pretendard 14px `var(--text-secondary)`. 호버 시 border-color `var(--primary-dim-border)`."
-- "코드 블록을 만들어줘. 컨테이너: `var(--surface)` 배경, `var(--border)` border, radius `var(--radius-lg)`. 헤더에 트래픽 라이트 dots(`var(--error)`, `var(--warning)`, `var(--success)`)와 파일명. 본문 JetBrains Mono 14px line-height 1.8. 키워드 `var(--primary)`, 문자열 `var(--secondary)`, 주석 `var(--text-muted)`."
-- "네비게이션 바를 만들어줘. 높이 56px, sticky top. 배경 `var(--bg-glass)` + backdrop-filter blur(12px). 왼쪽에 로고 32px + Galmuri11 Bold 16px `var(--primary)` 텍스트. 링크는 Pretendard 14px weight 500 `var(--text-secondary)`, active는 `var(--primary)` + `var(--primary-dim)` 배경."
+- "히어로 섹션을 만들어줘. 배경 `var(--color-bg)`. 제목은 Galmuri11 Bold 44px, 색상 `var(--color-fg)`, 강조 단어는 `var(--color-primary)`. 설명은 Pretendard 18px, 색상 `var(--color-fg-secondary)`. Primary 버튼(`var(--color-primary)` 배경, `var(--color-bg)` 텍스트, radius `var(--radius-lg)`)과 Ghost 버튼(transparent, `var(--color-border)` border)."
+- "프로젝트 카드를 만들어줘. 배경 `var(--color-surface)`, border 1px solid `var(--color-border)`, radius `var(--radius-xl)`, padding 24px. 태그는 Pretendard 12px weight 600, `var(--color-primary)` 텍스트, `var(--color-primary-dim)` 배경, radius `var(--radius-full)`. 제목 Pretendard 17px weight 700. 설명 Pretendard 14px `var(--color-fg-secondary)`. 호버 시 border-color `var(--color-primary-dim-border)`."
+- "코드 블록을 만들어줘. 컨테이너: `var(--color-surface)` 배경, `var(--color-border)` border, radius `var(--radius-xl)`. 헤더에 트래픽 라이트 dots(`var(--color-error)`, `var(--color-warning)`, `var(--color-success)`)와 파일명. 본문 JetBrains Mono 14px line-height 1.8. 키워드 `var(--color-primary)`, 문자열 `var(--color-secondary)`, 주석 `var(--color-fg-muted)`."
+- "네비게이션 바를 만들어줘. 높이 56px, sticky top. 배경 `var(--color-bg-glass)` + backdrop-filter blur(12px). 왼쪽에 로고 32px + Galmuri11 Bold 16px `var(--color-primary)` 텍스트. 링크는 Pretendard 14px weight 500 `var(--color-fg-secondary)`, active는 `var(--color-primary)` + `var(--color-primary-dim)` 배경."
 
 ### Iteration Guide
 1. 항상 Galmuri11은 Bold(700)으로만, 페이지 제목/섹션 레이블에만 적용
 2. 의심스러우면 Pretendard를 쓴다 — 가독성이 최우선
-3. 순수 블랙/화이트 대신 따뜻한 변형 사용 (`var(--bg)` / `var(--text-primary)`)
+3. 순수 블랙/화이트 대신 따뜻한 변형 사용 (`var(--color-bg)` / `var(--color-fg)`)
 4. 깊이는 shadow 없이 border + 배경색 차이로 표현
 5. 액센트 색상은 기능적 맥락에서만 사용 (CTA, 상태, 링크)
 6. Dim 배경은 `-dim` 토큰으로 — 불투명 색상을 사용하지 않음
