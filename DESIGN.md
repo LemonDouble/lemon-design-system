@@ -47,7 +47,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - **브랜드 아이콘**: [Simple Icons](https://simpleicons.org/) — GitHub, Slack 등 브랜드 로고 전용.
   - CDN: `https://cdn.jsdelivr.net/npm/simple-icons@latest/icons`
   - React: `@icons-pack/react-simple-icons`
-  - Color: Text Muted (`#5C524A`) 기본, 호버 시 Text Primary (`#F5F0EB`)
+  - Color: Text Muted (`#8D7E72`) 기본, 호버 시 Text Primary (`#F5F0EB`)
   - **예외 — Twitter**: Simple Icons의 X 로고 대신 `images/twitter-bird.svg`(클래식 트위터 새 로고)를 사용한다. `fill: currentColor`로 되어 있어 CSS 색상을 따른다.
 - **기술 스택 아이콘**: [devicon](https://devicon.dev/) — 블로그 등 기술 스택 표시 용도 (보조).
 
@@ -69,7 +69,8 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 ### Text
 - **Text Primary** (`#F5F0EB`): 제목, 카드 제목, 주요 텍스트. 순백이 아닌 미세한 따뜻함.
 - **Text Secondary** (`#A89E95`): 본문, 설명, 부가 텍스트.
-- **Text Muted** (`#5C524A`): 메타데이터, 비활성 텍스트, 줄번호, placeholder.
+- **Text Muted** (`#8D7E72`): 메타데이터, 비활성 텍스트, 줄번호, placeholder.
+- 모든 텍스트 색상은 BG와 Surface 위에서 대비 4.5:1(WCAG AA) 이상을 유지한다. Text Muted는 이 기준의 하한선이므로 더 어둡게 바꾸지 않는다.
 
 ### Accent Dim (배경 틴트용)
 - **Primary Dim** (`rgba(240, 185, 11, 0.12)`): Primary 배지/태그 배경.
@@ -184,7 +185,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - Padding: 10px 16px
 - Font: Pretendard 14px
 - Text: `#F5F0EB`
-- Placeholder: `#5C524A`
+- Placeholder: `#8D7E72`
 - Focus: border-color `rgba(240, 185, 11, 0.25)`
 
 ### Code Block
@@ -192,8 +193,8 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - Header bar: background `rgba(0,0,0,0.15)`, border-bottom 1px solid `#2E2723`
 - Header에 트래픽 라이트 dots: Error(`#EF4444`), Warning(`#FACC15`), Success(`#4ADE80`)
 - Body: Pretendard 14px, line-height 1.8, tabular-nums
-- Syntax: keyword → `#F0B90B` (Primary), string → `#CD6B5E` (Secondary), type → `#4ADE80` (Success), comment → `#5C524A` (Text Muted)
-- Line numbers: `#5C524A`, 28px 너비, 우측 정렬, margin-right 20px
+- Syntax: keyword → `#F0B90B` (Primary), string → `#CD6B5E` (Secondary), type → `#4ADE80` (Success), comment → `#8D7E72` (Text Muted)
+- Line numbers: `#8D7E72`, 28px 너비, 우측 정렬, margin-right 20px
 
 ### Inline Code
 - Font: Pretendard 13px weight 600 (Galmuri 아님)
@@ -482,7 +483,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - Border: `#2E2723`
 - Text heading: `#F5F0EB`
 - Text body: `#A89E95`
-- Text muted: `#5C524A`
+- Text muted: `#8D7E72`
 
 ### Font Quick Reference
 - 페이지 제목/섹션 레이블: `font-family: 'Galmuri11', monospace; font-weight: 700;`
@@ -491,7 +492,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 ### Example Component Prompts
 - "히어로 섹션을 만들어줘. 배경 #12100E. 제목은 Galmuri11 Bold 44px, 색상 #F5F0EB, 강조 단어는 #F0B90B. 설명은 Pretendard 18px, 색상 #A89E95. Primary 버튼(#F0B90B 배경, #12100E 텍스트, 8px radius)과 Ghost 버튼(transparent, #2E2723 border)."
 - "프로젝트 카드를 만들어줘. 배경 #1C1816, border 1px solid #2E2723, radius 12px, padding 24px. 태그는 Pretendard 12px weight 600, #F0B90B 텍스트, rgba(240,185,11,0.12) 배경, pill radius. 제목 Pretendard 17px weight 700. 설명 Pretendard 14px #A89E95. 호버 시 border-color rgba(240,185,11,0.25)."
-- "코드 블록을 만들어줘. 컨테이너: #1C1816 배경, #2E2723 border, 12px radius. 헤더에 트래픽 라이트 dots(#EF4444, #FACC15, #4ADE80)와 파일명. 본문 Pretendard 14px line-height 1.8. 키워드 #F0B90B, 문자열 #CD6B5E, 주석 #5C524A."
+- "코드 블록을 만들어줘. 컨테이너: #1C1816 배경, #2E2723 border, 12px radius. 헤더에 트래픽 라이트 dots(#EF4444, #FACC15, #4ADE80)와 파일명. 본문 Pretendard 14px line-height 1.8. 키워드 #F0B90B, 문자열 #CD6B5E, 주석 #8D7E72."
 - "네비게이션 바를 만들어줘. 높이 56px, sticky top. 배경 rgba(18,16,14,0.85) + backdrop-filter blur(12px). 왼쪽에 로고 32px + Galmuri11 Bold 16px #F0B90B 텍스트. 링크는 Pretendard 14px weight 500 #A89E95, active는 #F0B90B + rgba(240,185,11,0.12) 배경."
 
 ### Iteration Guide
