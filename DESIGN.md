@@ -40,13 +40,13 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 
 ### Icons
 - **UI 아이콘**: [Lucide](https://lucide.dev/) — 2px stroke, 24x24 기본. 미니멀한 선형 아이콘.
-  - CDN: `https://unpkg.com/lucide@latest`
+  - CDN: `https://unpkg.com/lucide@1.50.0/dist/umd/lucide.min.js`
   - React: `lucide-react`
   - Size: 기본 20px (본문), 16px (버튼/태그 내), 24px (네비게이션)
   - Stroke width: 2px (기본), 1.5px (큰 사이즈에서)
   - Color: 주변 텍스트 색상을 따른다 (`currentColor`)
 - **브랜드 아이콘**: [Simple Icons](https://simpleicons.org/) — GitHub, Slack 등 브랜드 로고 전용.
-  - CDN: `https://cdn.jsdelivr.net/npm/simple-icons@latest/icons`
+  - CDN: `https://cdn.jsdelivr.net/npm/simple-icons@16.33.0/icons`
   - React: `@icons-pack/react-simple-icons`
   - Color: `var(--text-muted)` 기본, 호버 시 `var(--text-primary)`
   - **예외 — Twitter**: Simple Icons의 X 로고 대신 `images/twitter-bird.svg`(클래식 트위터 새 로고)를 사용한다. `fill: currentColor`로 되어 있어 CSS 색상을 따른다.
@@ -187,7 +187,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 
 ### Font Family
 - **Heading** `--font-heading`: `Galmuri11`, fallback: `monospace`
-  - CDN: `https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css`
+  - CDN: `https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css`
 - **Body** `--font-body`: `Pretendard`, fallback: `-apple-system, BlinkMacSystemFont, sans-serif`
   - CDN: `https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css`
 - **Mono** `--font-mono`: `JetBrains Mono Variable`, fallback: `Pretendard`, `monospace`
@@ -595,3 +595,4 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 5. 액센트 색상은 기능적 맥락에서만 사용 (CTA, 상태, 링크)
 6. Dim 배경은 `-dim` 토큰으로 — 불투명 색상을 사용하지 않음
 7. 색상, 폰트, radius, z-index는 hex나 숫자 대신 토큰으로 참조
+8. CDN은 이 문서에 적힌 정확한 버전 그대로 쓴다. `@latest`를 쓰거나 버전을 생략하지 않는다
