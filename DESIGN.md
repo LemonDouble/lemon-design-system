@@ -86,6 +86,9 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
   --text-secondary: #A89E95;
   --text-muted: #8D7E72;
 
+  /* Focus */
+  --focus-ring: var(--text-muted);
+
   /* Semantic */
   --info: #60A5FA;
   --info-subtle: rgba(96, 165, 250, 0.06);
@@ -154,7 +157,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 
 ### Accent Dim (배경 틴트용)
 - `--primary-dim`, `--secondary-dim`: 배지, 태그, 활성 항목의 배경.
-- `--primary-dim-border`, `--secondary-dim-border`: 액센트 요소의 테두리, 카드 호버 테두리, 포커스 테두리.
+- `--primary-dim-border`, `--secondary-dim-border`: 액센트 요소의 테두리, 카드 호버 테두리.
 
 ### Semantic
 - **Info** `--info`: 안내, 정보, 알림 상태.
@@ -169,6 +172,15 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - **Pointer Events**: `none`
 - 적용 대상: 버튼, 입력 필드, 토글, 체크박스, 라디오, 셀렉트
 - 입력 필드 비활성: 배경 `var(--surface)`, 텍스트 `var(--text-muted)` + opacity 0.4
+
+### Focus State
+- 전역 포커스 링: `:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }` 하나로 모든 인터랙티브 요소를 처리한다. 컴포넌트마다 포커스 스타일을 따로 정의하지 않는다.
+- `:focus-visible`을 쓰므로 마우스 클릭에는 링이 나타나지 않고, 키보드로 이동할 때만 나타난다.
+- 예외 — `overflow: hidden` 컨테이너 안에 꽉 차는 요소(Accordion trigger 등): 링이 잘리지 않도록 `outline-offset: -2px`로 안쪽에 그린다.
+- 예외 — 텍스트 입력 요소(Input, Select, Textarea): 클릭해도 `:focus-visible`이 적용되므로 링 대신 `outline: none` + `border-color: var(--focus-ring)`로 표시한다.
+- 포커스 표시는 주변과 대비 3:1 이상이어야 한다([WCAG 1.4.11](https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html)). 투명도가 낮은 `-dim-border` 토큰은 이 기준을 통과하지 못하므로 포커스 표시에 쓰지 않는다.
+- 포커스 색은 노란색(Primary)을 쓰지 않는다. Primary는 이미 활성·선택 상태를 뜻하므로, 포커스까지 노란색이면 "선택된 요소"와 "키보드가 가리키는 요소"가 구분되지 않는다.
+- 클릭할 수 있는 요소는 `<button>`, `<a href>`, `<input>` 같은 네이티브 요소로 만든다. `<div onclick>`은 키보드로 포커스를 받을 수 없다.
 
 ## 4. Typography Rules
 
@@ -268,7 +280,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - Font: Pretendard 14px
 - Text: `var(--text-primary)`
 - Placeholder: `var(--text-muted)`
-- Focus: border-color `var(--primary-dim-border)`
+- Focus: border-color `var(--focus-ring)`
 
 ### Code Block
 - Container: background `var(--surface)`, border 1px solid `var(--border)`, radius `var(--radius-lg)`
@@ -313,6 +325,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - Row hover: background `var(--surface)`
 
 ### Toggle
+- Markup: `<button type="button" role="switch" aria-checked="true|false">`
 - Track: 44x24px, radius `var(--radius-lg)`
 - Off: background `var(--border)`
 - On: background `var(--primary)`
@@ -348,7 +361,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - Disabled: opacity 0.4, pointer-events none
 - Ellipsis: color `var(--text-muted)`
 - Gap: 4px
-- **Page Jump**: 현재 페이지가 editable input. 우상단에 연필 아이콘(16px circle, `var(--surface)` 배경, `var(--border)` 테두리) badge로 편집 가능 표시. Focus 시 배경 `var(--surface)`, 텍스트 `var(--primary)`, border `var(--primary-dim-border)`로 전환.
+- **Page Jump**: 현재 페이지가 editable input. 우상단에 연필 아이콘(16px circle, `var(--surface)` 배경, `var(--border)` 테두리) badge로 편집 가능 표시. Focus 시 배경 `var(--surface)`, 텍스트 `var(--primary)`, border `var(--focus-ring)`로 전환.
 - **Page Jump 동작**:
   - 숫자만 허용 (`inputmode="numeric"` + 입력 시 non-digit 제거)
   - Focus 시 값을 비워 즉시 입력 가능한 상태로 전환
@@ -373,19 +386,19 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - Background: `var(--surface)`, border 1px solid `var(--border)`, radius `var(--radius-md)`
 - Padding: 10px 40px 10px 16px (우측에 화살표 공간)
 - Font: Pretendard 14px
-- Focus: border-color `var(--primary-dim-border)`
+- Focus: border-color `var(--focus-ring)`
 
 ### Checkbox
 - Size: 18px, radius `var(--radius-xs)`
 - Unchecked: background `var(--surface)`, border `var(--border)`
 - Checked: background `var(--primary)`, border `var(--primary)`, 체크 아이콘 (배경색)
-- Focus: outline 2px solid `var(--primary-dim-border)`
+- Focus: 전역 포커스 링
 
 ### Radio
 - Size: 18px, radius 50%
 - Unchecked: background `var(--surface)`, border `var(--border)`
 - Checked: border `var(--primary)`, inner dot `box-shadow: inset 0 0 0 4px var(--primary)`
-- Focus: outline 2px solid `var(--primary-dim-border)`
+- Focus: 전역 포커스 링
 
 ### Textarea
 - 기본 Input과 동일한 스타일

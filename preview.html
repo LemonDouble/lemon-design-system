@@ -39,6 +39,9 @@
     --text-secondary: #A89E95;
     --text-muted: #8D7E72;
 
+    /* Focus */
+    --focus-ring: var(--text-muted);
+
     /* Semantic */
     --info: #60A5FA;
     --info-subtle: rgba(96, 165, 250, 0.06);
@@ -80,6 +83,12 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  .accordion-trigger:focus-visible { outline-offset: -2px; }
 
   body {
     background: var(--bg);
@@ -534,7 +543,7 @@
     transition: border-color 0.15s;
   }
   .input::placeholder { color: var(--text-muted); }
-  .input:focus { border-color: var(--primary-dim-border); }
+  .input:focus { border-color: var(--focus-ring); }
 
   /* ===== STATS ===== */
   .stats-grid {
@@ -602,6 +611,7 @@
     background: var(--border);
     border-radius: var(--radius-lg);
     position: relative;
+    border: none;
     cursor: pointer;
     transition: background 0.2s;
   }
@@ -787,7 +797,7 @@
     min-width: 200px;
     transition: border-color 0.15s;
   }
-  .select:focus { border-color: var(--primary-dim-border); }
+  .select:focus { border-color: var(--focus-ring); }
 
   .select-arrow {
     position: absolute;
@@ -904,6 +914,7 @@
     color: var(--text-secondary);
     background: transparent;
     border: 1px solid transparent;
+    font-family: inherit;
     cursor: pointer;
     transition: all 0.15s;
     text-decoration: none;
@@ -957,7 +968,7 @@
   .page-jump-input:focus {
     background: var(--surface);
     color: var(--primary);
-    border-color: var(--primary-dim-border);
+    border-color: var(--focus-ring);
   }
   .page-jump-icon {
     position: absolute;
@@ -1016,11 +1027,6 @@
     box-shadow: inset 0 0 0 4px var(--primary);
   }
 
-  .checkbox:focus, .radio:focus {
-    outline: 2px solid var(--primary-dim-border);
-    outline-offset: 1px;
-  }
-
   /* ===== TEXTAREA ===== */
   .textarea {
     width: 100%;
@@ -1038,7 +1044,7 @@
     transition: border-color 0.15s;
   }
   .textarea::placeholder { color: var(--text-muted); }
-  .textarea:focus { border-color: var(--primary-dim-border); }
+  .textarea:focus { border-color: var(--focus-ring); }
 
   /* ===== BREADCRUMB ===== */
   .breadcrumb {
@@ -1588,12 +1594,12 @@
   </div>
 
   <div class="toggle-row">
-    <div class="toggle on" onclick="this.classList.toggle('on')"></div>
+    <button type="button" role="switch" aria-checked="true" class="toggle on" onclick="this.setAttribute('aria-checked', this.classList.toggle('on'))"></button>
     <span class="toggle-label">다크 모드 활성화</span>
   </div>
 
   <div class="toggle-row">
-    <div class="toggle" onclick="this.classList.toggle('on')"></div>
+    <button type="button" role="switch" aria-checked="false" class="toggle" onclick="this.setAttribute('aria-checked', this.classList.toggle('on'))"></button>
     <span class="toggle-label">알림 수신</span>
   </div>
 
@@ -1636,7 +1642,7 @@
     <input type="text" class="input" value="비활성 입력 필드" disabled>
   </div>
   <div class="toggle-row" style="margin-top:20px;">
-    <div class="toggle on disabled"></div>
+    <button type="button" role="switch" aria-checked="true" class="toggle on disabled" disabled></button>
     <span class="toggle-label" style="opacity:0.4;">비활성 토글</span>
   </div>
 </section>
@@ -1735,16 +1741,16 @@
     <div class="section-title galmuri">Pagination</div>
   </div>
   <div class="pagination">
-    <a class="pagination-item">&larr;</a>
-    <a class="pagination-item">1</a>
-    <a class="pagination-item">2</a>
+    <button type="button" class="pagination-item">&larr;</button>
+    <button type="button" class="pagination-item">1</button>
+    <button type="button" class="pagination-item">2</button>
     <div class="page-jump-wrap">
       <input class="page-jump-input" type="text" inputmode="numeric" pattern="[0-9]*" value="3" data-current-page="3">
       <span class="page-jump-icon">&#9998;</span>
     </div>
     <span class="pagination-ellipsis">&hellip;</span>
-    <a class="pagination-item">99</a>
-    <a class="pagination-item">&rarr;</a>
+    <button type="button" class="pagination-item">99</button>
+    <button type="button" class="pagination-item">&rarr;</button>
   </div>
 </section>
 
