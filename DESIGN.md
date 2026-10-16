@@ -4,13 +4,14 @@
 
 LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 아이덴티티를 부여하기 위한 다크 모드 기반 디자인 시스템이다. 로고에서 추출한 골든 옐로우(`#F0B90B`)와 코랄 레드(`#CD6B5E`)를 핵심 액센트로, 로고의 다크 브라운에서 파생된 따뜻한 다크 배경(`#12100E`)을 기반으로 한다. 순수 블랙이 아닌 미세한 따뜻함이 깔린 배경은 로고와 자연스러운 색상 연속성을 만든다.
 
-타이포그래피는 이중 폰트 시스템을 사용한다. 페이지 제목 등 브랜딩 요소에는 8bit 픽셀 폰트 **Galmuri11**을 Bold(700) 전용으로 사용하고, 그 외 본문, 버튼, 태그, 코드 블록 등 가독성이 필요한 모든 곳에는 **Pretendard**를 사용한다. Galmuri11은 레트로 게임 감성을 부여하면서도 Pretendard와의 조합으로 모던한 느낌을 동시에 유지한다.
+타이포그래피는 이중 폰트 시스템을 사용한다. 페이지 제목 등 브랜딩 요소에는 8bit 픽셀 폰트 **Galmuri11**을 Bold(700) 전용으로 사용하고, 그 외 본문, 버튼, 태그 등 가독성이 필요한 모든 곳에는 **Pretendard**를 사용한다. 코드에는 고정폭 폰트 **JetBrains Mono**를 사용한다. Galmuri11은 레트로 게임 감성을 부여하면서도 Pretendard와의 조합으로 모던한 느낌을 동시에 유지한다.
 
 **Key Characteristics:**
 - 로고에서 추출한 골든 옐로우 + 코랄 레드 듀오톤 액센트
 - 로고 다크 브라운 파생 따뜻한 다크 배경 (`#12100E`, 순수 블랙이 아님)
 - Galmuri11 Bold(700) 전용 — 페이지 제목(h1-h3), 섹션 레이블, Stat 숫자, 로고 텍스트에만 사용
-- Pretendard — 본문, 버튼, 태그, 코드 블록, 인라인 코드 등 나머지 전부
+- Pretendard — 본문, 버튼, 태그 등 코드를 제외한 나머지 전부
+- JetBrains Mono — 코드 블록, 인라인 코드
 - 다크 모드 단일 테마 (라이트 모드 없음)
 - "이 사람 작품이구나" 라고 즉시 알아볼 수 있는 개인 브랜드 시스템
 
@@ -106,6 +107,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
   /* Font */
   --font-heading: 'Galmuri11', monospace;
   --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'Pretendard', monospace;
 
   /* Radius */
   --radius-xs: 4px;
@@ -175,6 +177,9 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
   - CDN: `https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css`
 - **Body** `--font-body`: `Pretendard`, fallback: `-apple-system, BlinkMacSystemFont, sans-serif`
   - CDN: `https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css`
+- **Mono** `--font-mono`: `JetBrains Mono Variable`, fallback: `Pretendard`, `monospace`
+  - CDN: `https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono@5.2.8/index.css`
+  - JetBrains Mono에는 한글 글리프가 없으므로, 코드 안의 한글은 Pretendard로 표시된다.
 
 ### Galmuri11 사용 규칙
 - **반드시 font-weight: 700 (Bold)로만 사용한다.** Regular(400) 사용 금지.
@@ -199,12 +204,12 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 | Label / Button | Pretendard | 14px | 600 | 1.0 | 버튼 텍스트, 강조 레이블 |
 | Tag / Badge | Pretendard | 12px | 600 | 1.0 | 태그, 배지, Chip |
 | Caption / Meta | Pretendard | 12px-13px | 400 | 1.0 | 메타데이터, 줄번호 |
-| Inline Code | Pretendard | 13px | 600 | inherit | 인라인 코드 (Galmuri 아님) |
-| Code Block | Pretendard | 14px | 400 | 1.8 | 코드 블록 (Galmuri 아님), tabular-nums |
+| Inline Code | JetBrains Mono | 13px | 500 | inherit | 인라인 코드 |
+| Code Block | JetBrains Mono | 14px | 400 | 1.8 | 코드 블록 |
 
 ### Principles
 - **Galmuri11은 브랜딩 전용**: 제목과 레이블에서만 사용하여 8bit 감성을 포인트로 부여한다. 본문이나 UI 요소에 Galmuri를 사용하면 가독성이 떨어진다.
-- **Pretendard가 기본**: 의심스러우면 Pretendard를 쓴다. 코드 블록도, 인라인 코드도, 태그도 전부 Pretendard.
+- **Pretendard가 기본**: 의심스러우면 Pretendard를 쓴다. 코드(코드 블록, 인라인 코드)만 예외로 JetBrains Mono를 쓴다.
 - **Weight 절제**: Galmuri11은 700 단일 weight. Pretendard는 400(본문), 500(링크/탭 등 인터랙티브 텍스트), 600(레이블/버튼), 700(컴포넌트 제목) 네 가지만 사용.
 
 ## 5. Component Stylings
@@ -269,12 +274,12 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - Container: background `var(--surface)`, border 1px solid `var(--border)`, radius `var(--radius-lg)`
 - Header bar: background `rgba(0,0,0,0.15)`, border-bottom 1px solid `var(--border)`
 - Header에 트래픽 라이트 dots: Error(`var(--error)`), Warning(`var(--warning)`), Success(`var(--success)`)
-- Body: Pretendard 14px, line-height 1.8, tabular-nums
+- Body: JetBrains Mono 14px, line-height 1.8
 - Syntax: keyword → `var(--primary)`, string → `var(--secondary)`, type → `var(--success)`, comment → `var(--text-muted)`
 - Line numbers: `var(--text-muted)`, 28px 너비, 우측 정렬, margin-right 20px
 
 ### Inline Code
-- Font: Pretendard 13px weight 600 (Galmuri 아님)
+- Font: JetBrains Mono 13px weight 500
 - Background: `var(--surface)`
 - Border: 1px solid `var(--border)`
 - Padding: 2px 8px
@@ -509,7 +514,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 ### Do
 - Galmuri11은 반드시 `font-weight: 700` (Bold)으로만 사용한다
 - Galmuri11은 페이지 제목(h1-h3), 섹션 레이블, Stat 숫자, 로고 텍스트에만 사용한다
-- 가독성이 필요한 모든 곳에 Pretendard를 사용한다 (태그, 코드, 버튼 포함)
+- 가독성이 필요한 모든 곳에 Pretendard를 사용한다 (태그, 버튼 포함). 코드에만 JetBrains Mono를 사용한다
 - 배경색은 `var(--bg)`를 사용한다 (순수 `#000000` 아님)
 - 텍스트는 `var(--text-primary)`를 사용한다 (순수 `#FFFFFF` 아님) — 따뜻한 톤 유지
 - Primary(`var(--primary)`)는 CTA, 링크, 활성 상태 등 "행동 유도" 요소에 사용한다
@@ -558,12 +563,13 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 
 ### Font Quick Reference
 - 페이지 제목/섹션 레이블: `font-family: var(--font-heading); font-weight: 700;`
+- 코드: `font-family: var(--font-mono);`
 - 그 외 전부: `font-family: var(--font-body);`
 
 ### Example Component Prompts
 - "히어로 섹션을 만들어줘. 배경 `var(--bg)`. 제목은 Galmuri11 Bold 44px, 색상 `var(--text-primary)`, 강조 단어는 `var(--primary)`. 설명은 Pretendard 18px, 색상 `var(--text-secondary)`. Primary 버튼(`var(--primary)` 배경, `var(--bg)` 텍스트, radius `var(--radius-md)`)과 Ghost 버튼(transparent, `var(--border)` border)."
 - "프로젝트 카드를 만들어줘. 배경 `var(--surface)`, border 1px solid `var(--border)`, radius `var(--radius-lg)`, padding 24px. 태그는 Pretendard 12px weight 600, `var(--primary)` 텍스트, `var(--primary-dim)` 배경, radius `var(--radius-full)`. 제목 Pretendard 17px weight 700. 설명 Pretendard 14px `var(--text-secondary)`. 호버 시 border-color `var(--primary-dim-border)`."
-- "코드 블록을 만들어줘. 컨테이너: `var(--surface)` 배경, `var(--border)` border, radius `var(--radius-lg)`. 헤더에 트래픽 라이트 dots(`var(--error)`, `var(--warning)`, `var(--success)`)와 파일명. 본문 Pretendard 14px line-height 1.8. 키워드 `var(--primary)`, 문자열 `var(--secondary)`, 주석 `var(--text-muted)`."
+- "코드 블록을 만들어줘. 컨테이너: `var(--surface)` 배경, `var(--border)` border, radius `var(--radius-lg)`. 헤더에 트래픽 라이트 dots(`var(--error)`, `var(--warning)`, `var(--success)`)와 파일명. 본문 JetBrains Mono 14px line-height 1.8. 키워드 `var(--primary)`, 문자열 `var(--secondary)`, 주석 `var(--text-muted)`."
 - "네비게이션 바를 만들어줘. 높이 56px, sticky top. 배경 `var(--bg-glass)` + backdrop-filter blur(12px). 왼쪽에 로고 32px + Galmuri11 Bold 16px `var(--primary)` 텍스트. 링크는 Pretendard 14px weight 500 `var(--text-secondary)`, active는 `var(--primary)` + `var(--primary-dim)` 배경."
 
 ### Iteration Guide

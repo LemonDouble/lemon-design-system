@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri/dist/galmuri.css">
 <script src="https://unpkg.com/lucide@latest"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono@5.2.8/index.css">
 <style>
   :root {
     /* Brand */
@@ -59,6 +60,7 @@
     /* Font */
     --font-heading: 'Galmuri11', monospace;
     --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono Variable', 'Pretendard', monospace;
 
     /* Radius */
     --radius-xs: 4px;
@@ -450,11 +452,10 @@
 
   .code-body {
     padding: 20px 24px;
-    font-family: var(--font-body);
+    font-family: var(--font-mono);
     font-size: 14px;
     line-height: 1.8;
     overflow-x: auto;
-    font-variant-numeric: tabular-nums;
   }
 
   .code-line-num {
@@ -477,9 +478,9 @@
   a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   code {
-    font-family: var(--font-body);
+    font-family: var(--font-mono);
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     background: var(--surface);
     padding: 2px 8px;
     border-radius: var(--radius-xs);

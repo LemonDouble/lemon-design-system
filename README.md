@@ -13,6 +13,6 @@ AI 에이전트가 읽을 수 있는 개인 디자인 시스템. 프로젝트에
 ## Key Decisions
 
 - **Colors**: Logo Yellow `#F0B90B` + Coral `#CD6B5E` on Warm Dark `#12100E`
-- **Fonts**: Galmuri11 Bold (headings only) + Pretendard (everything else)
+- **Fonts**: Galmuri11 Bold (headings only) + Pretendard (everything else) + JetBrains Mono (code)
 - **Icons**: Lucide (UI) + Simple Icons (brands)
 - **Theme**: Dark mode only
