@@ -347,6 +347,7 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 - Links: Pretendard 14px weight 500, color `var(--color-fg-secondary)`
 - Active link: color `var(--color-primary)`, background `var(--color-primary-dim)`
 - CTA: Small Primary button
+- Mobile (< 640px): 링크와 CTA를 숨기고 햄버거 버튼(Lucide `menu` 24px, 40x40, `aria-expanded`)을 둔다. 누르면 네비게이션 아래로 링크와 CTA를 세로로 펼치고 아이콘을 `x`로 바꾼다. 좌우 padding은 20px.
 
 ### Table
 - Container: border 1px solid `var(--color-border)`, radius `var(--radius-xl)`, overflow hidden

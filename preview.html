@@ -155,6 +155,23 @@
   .nav-link:hover { color: var(--color-fg); background: var(--color-surface); }
   .nav-link.active { color: var(--color-primary); background: var(--color-primary-dim); }
 
+  .nav-menu-button {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    color: var(--color-fg-secondary);
+    cursor: pointer;
+  }
+  .nav-menu-button:hover { color: var(--color-fg); border-color: var(--color-border-hover); }
+  .nav-menu-button .icon-close,
+  .nav.open .nav-menu-button .icon-open { display: none; }
+  .nav.open .nav-menu-button .icon-close { display: block; }
+
   .nav-right { display: flex; gap: 12px; align-items: center; }
 
   /* ===== ICONS ===== */
@@ -1388,6 +1405,15 @@
     transition: fill 0.15s;
   }
   .brand-icon:hover { fill: var(--color-fg); }
+  /* ===== RESPONSIVE: 모바일 네비게이션 ===== */
+  @media (max-width: 639px) {
+    .nav { padding: 8px 20px; height: auto; min-height: 56px; flex-wrap: wrap; }
+    .nav-menu-button { display: inline-flex; order: 2; }
+    .nav-links, .nav-right { display: none; }
+    .nav.open .nav-links { display: flex; order: 3; flex-direction: column; gap: 4px; width: 100%; padding: 12px 0 8px; }
+    .nav.open .nav-right { display: flex; order: 4; width: 100%; padding-bottom: 8px; }
+    .nav.open .nav-right .btn { flex: 1; justify-content: center; }
+  }
 </style>
 </head>
 <body>
@@ -1408,6 +1434,10 @@
     <a href="#" class="btn btn-sm btn-ghost">GitHub</a>
     <a href="#" class="btn btn-sm btn-primary">Contact</a>
   </div>
+  <button type="button" class="nav-menu-button" aria-label="메뉴 열기" aria-expanded="false" onclick="toggleNavMenu(this)">
+    <i data-lucide="menu" width="24" height="24" class="icon-open"></i>
+    <i data-lucide="x" width="24" height="24" class="icon-close"></i>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -2181,6 +2211,12 @@
       document.getElementById(tab.dataset.tab).classList.add('active');
     });
   });
+
+  function toggleNavMenu(button) {
+    const isOpen = button.closest('.nav').classList.toggle('open');
+    button.setAttribute('aria-expanded', isOpen);
+    button.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
+  }
 
   // Lucide icons
   if (window.lucide) lucide.createIcons();
