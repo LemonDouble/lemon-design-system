@@ -13,26 +13,68 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/static/pretendard.min.css">
 <style>
   :root {
+    /* Brand */
     --primary: #F0B90B;
     --primary-hover: #D4A30A;
     --primary-dim: rgba(240, 185, 11, 0.12);
     --primary-dim-border: rgba(240, 185, 11, 0.25);
     --secondary: #CD6B5E;
-    --secondary-hover: #B85D51;
     --secondary-dim: rgba(205, 107, 94, 0.12);
     --secondary-dim-border: rgba(205, 107, 94, 0.25);
+
+    /* Background & Surface */
     --bg: #12100E;
+    --bg-glass: rgba(18, 16, 14, 0.85);
     --surface: #1C1816;
     --surface-hover: #231E1B;
+    --overlay: rgba(0, 0, 0, 0.6);
+
+    /* Border */
     --border: #2E2723;
     --border-hover: #3D3530;
+
+    /* Text */
     --text-primary: #F5F0EB;
     --text-secondary: #A89E95;
     --text-muted: #8D7E72;
+
+    /* Semantic */
     --info: #60A5FA;
+    --info-subtle: rgba(96, 165, 250, 0.06);
+    --info-dim: rgba(96, 165, 250, 0.12);
+    --info-dim-border: rgba(96, 165, 250, 0.25);
     --success: #4ADE80;
+    --success-subtle: rgba(74, 222, 128, 0.06);
+    --success-dim: rgba(74, 222, 128, 0.12);
+    --success-dim-border: rgba(74, 222, 128, 0.25);
     --warning: #FACC15;
+    --warning-subtle: rgba(250, 204, 21, 0.06);
+    --warning-dim: rgba(250, 204, 21, 0.12);
+    --warning-dim-border: rgba(250, 204, 21, 0.25);
     --error: #EF4444;
+    --error-subtle: rgba(239, 68, 68, 0.06);
+    --error-dim: rgba(239, 68, 68, 0.12);
+    --error-dim-border: rgba(239, 68, 68, 0.25);
+
+    /* Font */
+    --font-heading: 'Galmuri11', monospace;
+    --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* Radius */
+    --radius-xs: 4px;
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
+
+    /* Z-index */
+    --z-base: 0;
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-overlay: 300;
+    --z-modal: 400;
+    --z-toast: 500;
+    --z-tooltip: 600;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -40,14 +82,14 @@
   body {
     background: var(--bg);
     color: var(--text-primary);
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: var(--font-body);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
 
   /* ===== Galmuri: 페이지 제목/레이블 전용, 항상 Bold(700) ===== */
   .galmuri {
-    font-family: 'Galmuri11', monospace;
+    font-family: var(--font-heading);
     font-weight: 700;
   }
 
@@ -55,8 +97,8 @@
   .nav {
     position: sticky;
     top: 0;
-    z-index: 100;
-    background: rgba(18, 16, 14, 0.85);
+    z-index: var(--z-sticky);
+    background: var(--bg-glass);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     padding: 0 32px;
@@ -75,11 +117,11 @@
   .nav-logo {
     width: 32px;
     height: 32px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
   }
 
   .nav-title {
-    font-family: 'Galmuri11', monospace;
+    font-family: var(--font-heading);
     font-weight: 700;
     font-size: 16px;
     color: var(--primary);
@@ -96,7 +138,7 @@
     color: var(--text-secondary);
     text-decoration: none;
     padding: 6px 14px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     transition: all 0.15s;
   }
   .nav-link:hover { color: var(--text-primary); background: var(--surface); }
@@ -109,11 +151,11 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: 'Pretendard', sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
     font-weight: 600;
     padding: 10px 20px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     border: none;
     cursor: pointer;
     transition: all 0.15s;
@@ -143,7 +185,7 @@
   .btn-sm {
     font-size: 13px;
     padding: 6px 14px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
   }
 
   .btn:disabled, .btn[disabled] {
@@ -181,12 +223,12 @@
     background: var(--primary-dim);
     border: 1px solid var(--primary-dim-border);
     padding: 6px 16px;
-    border-radius: 9999px;
+    border-radius: var(--radius-full);
     margin-bottom: 24px;
   }
 
   .hero h1 {
-    font-family: 'Galmuri11', monospace;
+    font-family: var(--font-heading);
     font-weight: 700;
     font-size: 44px;
     line-height: 1.2;
@@ -217,7 +259,7 @@
   }
 
   .section-label {
-    font-family: 'Galmuri11', monospace;
+    font-family: var(--font-heading);
     font-weight: 700;
     font-size: 12px;
     letter-spacing: 1.5px;
@@ -227,7 +269,7 @@
   }
 
   .section-title {
-    font-family: 'Galmuri11', monospace;
+    font-family: var(--font-heading);
     font-weight: 700;
     font-size: 28px;
     color: var(--text-primary);
@@ -259,7 +301,7 @@
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     padding: 24px;
     transition: border-color 0.2s;
   }
@@ -276,7 +318,7 @@
     font-size: 12px;
     font-weight: 600;
     padding: 4px 10px;
-    border-radius: 9999px;
+    border-radius: var(--radius-full);
   }
 
   .card-tag--primary {
@@ -291,7 +333,7 @@
 
   .card-tag--success {
     color: var(--success);
-    background: rgba(74, 222, 128, 0.1);
+    background: var(--success-dim);
   }
 
   .card-status {
@@ -334,7 +376,7 @@
   .table-wrapper {
     overflow-x: auto;
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
   }
 
   table {
@@ -369,14 +411,14 @@
     font-size: 11px;
     font-weight: 600;
     padding: 2px 8px;
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
   }
 
   /* ===== CODE BLOCK ===== */
   .code-block {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
   }
 
@@ -408,7 +450,7 @@
 
   .code-body {
     padding: 20px 24px;
-    font-family: 'Pretendard', sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
     line-height: 1.8;
     overflow-x: auto;
@@ -427,7 +469,7 @@
   .c-comment { color: var(--text-muted); }
   .c-keyword { color: var(--primary); }
   .c-string { color: var(--secondary); }
-  .c-type { color: #4ADE80; }
+  .c-type { color: var(--success); }
   .c-default { color: var(--text-primary); }
 
   /* ===== INLINE ===== */
@@ -435,12 +477,12 @@
   a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
   code {
-    font-family: 'Pretendard', sans-serif;
+    font-family: var(--font-body);
     font-size: 13px;
     font-weight: 600;
     background: var(--surface);
     padding: 2px 8px;
-    border-radius: 4px;
+    border-radius: var(--radius-xs);
     color: var(--secondary);
     border: 1px solid var(--border);
   }
@@ -450,7 +492,7 @@
     display: flex;
     gap: 12px;
     padding: 16px 20px;
-    border-radius: 10px;
+    border-radius: var(--radius-lg);
     font-size: 14px;
     line-height: 1.6;
     margin-top: 24px;
@@ -482,9 +524,9 @@
     flex: 1;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 10px 16px;
-    font-family: 'Pretendard', sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
     color: var(--text-primary);
     outline: none;
@@ -503,13 +545,13 @@
   .stat-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     padding: 20px;
     text-align: center;
   }
 
   .stat-value {
-    font-family: 'Galmuri11', monospace;
+    font-family: var(--font-heading);
     font-weight: 700;
     font-size: 32px;
     color: var(--primary);
@@ -557,7 +599,7 @@
     width: 44px;
     height: 24px;
     background: var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     position: relative;
     cursor: pointer;
     transition: background 0.2s;
@@ -646,7 +688,7 @@
     border-top: none;
     border-left: none;
     border-right: none;
-    font-family: 'Pretendard', sans-serif;
+    font-family: var(--font-body);
   }
   .tab-item:hover { color: var(--text-secondary); }
   .tab-item.active { color: var(--primary); border-bottom-color: var(--primary); }
@@ -658,12 +700,12 @@
   .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: var(--overlay);
     backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 200;
+    z-index: var(--z-overlay);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s;
@@ -673,7 +715,7 @@
   .modal {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     width: 100%;
     max-width: 480px;
     margin: 16px;
@@ -701,7 +743,7 @@
     justify-content: center;
     background: none;
     border: 1px solid var(--border);
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     color: var(--text-muted);
     cursor: pointer;
     font-size: 16px;
@@ -734,9 +776,9 @@
     appearance: none;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 10px 40px 10px 16px;
-    font-family: 'Pretendard', sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
     color: var(--text-primary);
     cursor: pointer;
@@ -767,10 +809,10 @@
     left: 0;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 4px;
     min-width: 200px;
-    z-index: 50;
+    z-index: var(--z-dropdown);
     display: none;
   }
   .dropdown-menu.open { display: block; }
@@ -783,10 +825,10 @@
     color: var(--text-secondary);
     background: none;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
     text-align: left;
-    font-family: 'Pretendard', sans-serif;
+    font-family: var(--font-body);
     transition: all 0.1s;
   }
   .dropdown-item:hover { background: var(--surface-hover); color: var(--text-primary); }
@@ -804,7 +846,7 @@
     align-items: center;
     gap: 12px;
     padding: 12px 16px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     font-size: 14px;
     border: 1px solid var(--border);
     background: var(--surface);
@@ -832,15 +874,15 @@
     padding: 0 4px;
   }
 
-  .toast--success { border-color: rgba(74, 222, 128, 0.25); background: rgba(74, 222, 128, 0.06); }
-  .toast--success .toast-icon { background: rgba(74, 222, 128, 0.15); color: var(--success); }
-  .toast--warning { border-color: rgba(250, 204, 21, 0.25); background: rgba(250, 204, 21, 0.06); }
-  .toast--warning .toast-icon { background: rgba(250, 204, 21, 0.15); color: var(--warning); }
-  .toast--error { border-color: rgba(239, 68, 68, 0.25); background: rgba(239, 68, 68, 0.06); }
-  .toast--error .toast-icon { background: rgba(239, 68, 68, 0.15); color: var(--error); }
+  .toast--success { border-color: var(--success-dim-border); background: var(--success-subtle); }
+  .toast--success .toast-icon { background: var(--success-dim); color: var(--success); }
+  .toast--warning { border-color: var(--warning-dim-border); background: var(--warning-subtle); }
+  .toast--warning .toast-icon { background: var(--warning-dim); color: var(--warning); }
+  .toast--error { border-color: var(--error-dim-border); background: var(--error-subtle); }
+  .toast--error .toast-icon { background: var(--error-dim); color: var(--error); }
 
-  .toast--info { border-color: rgba(96, 165, 250, 0.25); background: rgba(96, 165, 250, 0.06); }
-  .toast--info .toast-icon { background: rgba(96, 165, 250, 0.15); color: var(--info); }
+  .toast--info { border-color: var(--info-dim-border); background: var(--info-subtle); }
+  .toast--info .toast-icon { background: var(--info-dim); color: var(--info); }
 
   /* ===== PAGINATION ===== */
   .pagination {
@@ -855,7 +897,7 @@
     min-width: 36px;
     height: 36px;
     padding: 0 8px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     font-size: 14px;
     font-weight: 500;
     color: var(--text-secondary);
@@ -902,7 +944,7 @@
     height: 36px;
     background: var(--primary);
     border: 2px solid var(--primary);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     color: var(--bg);
     font-size: 14px;
     font-weight: 600;
@@ -955,7 +997,7 @@
     transition: all 0.15s;
   }
 
-  .checkbox { border-radius: 4px; }
+  .checkbox { border-radius: var(--radius-xs); }
   .radio { border-radius: 50%; }
 
   .checkbox:checked {
@@ -983,9 +1025,9 @@
     width: 100%;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     padding: 12px 16px;
-    font-family: 'Pretendard', sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
     color: var(--text-primary);
     outline: none;
@@ -1038,7 +1080,7 @@
     font-size: 12px;
     font-weight: 500;
     padding: 6px 12px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
@@ -1065,14 +1107,14 @@
 
   .skeleton {
     background: var(--border);
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     animation: skeleton-pulse 1.5s ease-in-out infinite;
   }
 
   .skeleton-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     padding: 24px;
   }
 
@@ -1081,7 +1123,7 @@
     text-align: center;
     padding: 64px 32px;
     border: 1px dashed var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
   }
 
   .empty-icon {
@@ -1108,7 +1150,7 @@
     padding: 12px 20px;
     margin: 16px 0;
     background: var(--primary-dim);
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
     color: var(--text-secondary);
     font-size: 15px;
     line-height: 1.7;
@@ -1139,7 +1181,7 @@
     grid-template-columns: 240px 1fr;
     gap: 0;
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     height: 360px;
   }
@@ -1159,7 +1201,7 @@
   }
 
   .sidebar-logo {
-    font-family: 'Galmuri11', monospace;
+    font-family: var(--font-heading);
     font-weight: 700;
     font-size: 15px;
     color: var(--primary);
@@ -1175,7 +1217,7 @@
     font-size: 14px;
     color: var(--text-secondary);
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     transition: all 0.1s;
   }
   .sidebar-link:hover { background: var(--surface-hover); color: var(--text-primary); text-decoration: none; }
@@ -1211,7 +1253,7 @@
   /* ===== ACCORDION ===== */
   .accordion {
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
   }
 
@@ -1226,7 +1268,7 @@
     padding: 16px 20px;
     background: none;
     border: none;
-    font-family: 'Pretendard', sans-serif;
+    font-family: var(--font-body);
     font-size: 15px;
     font-weight: 600;
     color: var(--text-primary);
@@ -1292,7 +1334,7 @@
     gap: 8px;
     width: 80px;
     padding: 16px 8px;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     transition: background 0.1s;
   }
   .icon-item:hover { background: var(--surface); }
@@ -1497,9 +1539,9 @@
   <div class="code-block">
     <div class="code-header">
       <div class="code-dots">
-        <div class="code-dot" style="background:#EF4444;"></div>
-        <div class="code-dot" style="background:#FACC15;"></div>
-        <div class="code-dot" style="background:#4ADE80;"></div>
+        <div class="code-dot" style="background:var(--error);"></div>
+        <div class="code-dot" style="background:var(--warning);"></div>
+        <div class="code-dot" style="background:var(--success);"></div>
       </div>
       <div class="code-filename">theme.config.ts</div>
     </div>
