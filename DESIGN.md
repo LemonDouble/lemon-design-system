@@ -25,13 +25,17 @@ LemonDouble Design System은 개인 프로젝트 전반에 일관된 브랜드 �
 |------|------|--------|
 | `images/lemon-logo.webp` | 로고 (원형 엠블럼) | Nav 로고, OG 이미지 |
 | `images/lemon-avatar.webp` | 아바타 (얼굴 크롭) | 프로필 사진, Avatar 컴포넌트, 댓글 프로필 |
-| `images/lemon-character.webp` | 마스코트 (풀샷) | 히어로 일러스트, 랜딩 페이지, About 페이지 |
+| `images/lemon-character.webp` | 마스코트 (풀샷, 투명 배경) | 히어로 일러스트, 랜딩 페이지, About 페이지 |
+| `images/lemon-character-sd.webp` | 마스코트 SD (풀샷, 투명 배경) | 빈 상태, 404 페이지, 작은 일러스트 영역 |
+| `images/lemon-character-mono.svg` | 마스코트 단색 마크 SVG | 푸터, 워터마크 등 한 가지 색만 쓰는 곳. `fill: currentColor`라서 인라인 SVG나 CSS mask로 쓰면 CSS 색상을 따른다 |
 | `images/favicon.ico` | 파비콘 (멀티사이즈 ICO) | 브라우저 탭 아이콘 |
 | `images/favicon-32.png` | 파비콘 32x32 PNG | 브라우저 탭 아이콘 (모던 브라우저) |
 | `images/apple-touch-icon.png` | Apple Touch Icon 180x180 | iOS 홈 화면 아이콘 |
 | `images/favicon-192.png` | 파비콘 192x192 PNG | Android/Chrome 앱 아이콘 |
 | `images/favicon-512.png` | 파비콘 512x512 PNG | PWA 아이콘, 스플래시 스크린 |
 | `images/twitter-bird.svg` | 트위터 새 로고 SVG | 소셜 링크의 Twitter/X 아이콘 (Simple Icons 대신 사용) |
+
+- 새 포즈나 표정의 마스코트 이미지가 필요하면 [LemonDouble/private-resources](https://github.com/LemonDouble/private-resources)(비공개)의 `character/ld/`, `character/sd/` 설정 시트 5종(마스터 비주얼, 삼면도, 의상 시트, 얼굴 표정, 포즈)을 생성형 AI 참조 이미지로 사용한다.
 
 #### Favicon HTML 스니펫
 ```html
